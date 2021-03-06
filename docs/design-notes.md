@@ -44,7 +44,7 @@ A web app that allows users to collaboratively create maps which list multiple "
 - As a user I can see available maps saved by myself or others because I want to see a list of dog parks that are near me or are highly rated.
 - Given a list of user created maps with available dog parks I can favorite the maps or filter based on my criteria
 - As a user I can view a map without an account because I DONT WANT TO GIVE YOU MY INFO
-- As a map I can contain  many points of interest  because I identify as a map. Given a specific map is selected it will show all relavent pins acording to filters.
+- As a map I can contain  many points of interest  because I identify as a map. Given a specific map is selected it will show all relavent pins acording the user created map?.
 - As a user I can expand a point of interest and see quick view of details beacuse i don't want to click back and forth between pages on quick glance of pins.
 - Given a pin is clicked on it will show a quick view of park info with thumbnail and raiting. If double clicked it will open to full details and locaiton.
 - As a auth. user I can create saved maps and edit, update, remove points within those maps  because i want to have easily refrence past searches.
