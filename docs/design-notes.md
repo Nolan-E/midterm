@@ -50,6 +50,7 @@ A web app that allows users to collaboratively create maps which list multiple "
 - As a auth. user I can create saved maps and edit, update, remove points within those maps  because i want to have easily refrence past searches.
 - As a user I can favourite maps created by myself or by others because i want to easily refrence those searches/maps
 - As a user I can have a profile because i want to save my maps  and share with others.
+- Given I have a profile it should show me my info and my saved favorited or created maps
 
 
 
