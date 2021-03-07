@@ -49,9 +49,6 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/test/", (req, res) => {
-  res.render("test");
-});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
