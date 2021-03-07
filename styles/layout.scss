@@ -2,6 +2,8 @@
 
 body {
   background-color: #EEE;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     color: #244751;
