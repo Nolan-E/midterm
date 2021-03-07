@@ -3,6 +3,8 @@ body {
   height: 85vh;
   width: 90vw;
   background-color: #EEE;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     color: #244751;

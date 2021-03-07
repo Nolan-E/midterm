@@ -3,11 +3,229 @@
   <head>
     <title>Home Page</title>
 
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
+
+    <!-- App CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main-body-content.css" type="text/css" />
 
+    <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<<<<<<< HEAD
+
+    <!-- App JS -->
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+  </head>
+
+  <body id="body">
+
+
+
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Dog Parks</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto">
+          <div id="nav-left">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Explore Maps</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Favorite Maps
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Parks When I'm Sad</a>
+                <a class="dropdown-item" href="#">Parks When I'm Less Sad</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Every Other Day</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Maps
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Riverside Parks</a>
+                <a class="dropdown-item" href="#">Downtown Parks</a>
+                <a class="dropdown-item" href="#">Northwest Parks</a>
+              </div>
+            </li>
+
+          </div>
+
+
+
+
+        </ul>
+        <div class="form-group my-2 my-lg-0" id="nav-right">
+          <a class="nav-item nav-link" href="#">First Last</a>
+          <a class="nav-item nav-link" href="#">Register</a>
+          <a class="nav-item nav-link" href="#">Login</a>
+          <a class="nav-item nav-link" href="#">Logout</a>
+        </div>
+      </div>
+    </nav> -->
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Wiki Maps</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" id="navbar-nav">
+          <div id="nav-left">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Explore Maps</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    My Favorite Maps
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Parks When I'm Sad</a>
+                    <a class="dropdown-item" href="#">Parks When I'm Happy</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Every Other Day</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    My Maps
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Riverside Parks</a>
+                    <a class="dropdown-item" href="#">Downtown Parks</a>
+                    <a class="dropdown-item" href="#">South East Parks</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+
+
+
+
+
+          <div id="nav-right">
+            <a class="nav-item nav-link" href="#">First Last</a>
+            <a class="nav-item nav-link" href="#">Register</a>
+            <a class="nav-item nav-link" href="#">Login</a>
+            <a class="nav-item nav-link" href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id=main-body-content>
+      <div id="map-info-area">
+        <h1>Explore Maps</h1>
+
+        <div class="card border-primary mb-2">
+          <div class="card-header">Suzy Kerr</div>
+          <div class="card-body text-primary">
+            <h5 class="card-title">Suzy's Top 10 Dog Parks</h5>
+            <small id="map-author-rating">
+              <p class="card-text">Suzy Kerr</p>
+              <p class="card-text">4.5/5</p>
+            </small>
+          </div>
+        </div>
+
+        <div class="card border-primary mb-2">
+          <div class="card-header">Robert Mills</div>
+          <div class="card-body text-primary">
+            <h5 class="card-title">Best Open Space Parks</h5>
+            <small id="map-author-rating">
+              <p class="card-text">Robert Mills</p>
+              <p class="card-text">4.1/5</p>
+            </small>
+          </div>
+        </div>
+
+        <div class="card border-primary mb-1">
+          <div class="card-body text-primary">
+            <h5 class="card-title">Suzy's Top 10 Dog Parks</h5>
+            <small>
+              <p class="card-text mb-0">Map by Suzy Kerr</p>
+              <p class="card-text mb-0">Average Rating 4.3/5 from 15 users</p>
+              <p class="card-text mb-0">4 user reviews. Click to view</p>
+            </small>
+          </div>
+        </div>
+
+        <div class="card border-dark mb-1">
+          <div class="card-body text-dark">
+            <h5 class="card-title">Bowmont Park</h5>
+          </div>
+        </div>
+
+        <div class="card border-dark mb-1">
+          <div class="card-body text-dark">
+            <h5 class="card-title">Nose Hill Park</h5>
+          </div>
+        </div>
+
+
+        <div class="card border-primary mb-1">
+          <div class="card-body text-primary">
+            <h5 class="card-title">Suzy's Top 10 Dog Parks</h5>
+            <small>
+              <p class="card-text mb-0">Map by Suzy Kerr</p>
+              <p class="card-text mb-0">Average Rating 4.3/5 from 15 users</p>
+              <p class="card-text mb-0">4 user reviews. Click to view</p>
+            </small>
+          </div>
+        </div>
+
+        <div class="card border-dark mb-1">
+          <div class="card-header bg-transparent border-success">Great Selection!</div>
+          <div class="card-body text-dark">
+            <p class="card-text">Great list! I've been to 7 of these and agree with her picks. Definitely worth checking out.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success text-muted">Mark White</div>
+        </div>
+
+        <div class="card border-dark mb-1">
+          <div class="card-header bg-transparent border-success">Love these!</div>
+          <div class="card-body text-dark">
+            <p class="card-text">Visited all of these after seeing this list.</p>
+          </div>
+          <div class="card-footer bg-transparent border-success text-muted">Jack Black</div>
+        </div>
+
+
+
+
+      </div>
+      <div id="map-area">
+        <h1>Map Area</h1>
+      </div>
+    </div>
+
+
+
+
+    <!-- For Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+=======
     <script type="text/javascript" src="/scripts/app.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -43,5 +261,6 @@
             });
       });
     </script>
+>>>>>>> 44b9b0487df784c3cd36d7df222be5c2bd9a3d49
   </body>
 </html>
