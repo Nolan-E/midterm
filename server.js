@@ -10,7 +10,6 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const axios = require('axios');
-const gLoc = require('./public/scripts/locate');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -48,42 +47,17 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  // axios.get('https://api.ipify.org?format=json')
-  //   .then(response => response.data.ip)
-  //   .then(data => {
-  //     const location = `https://freegeoip.app/json/${data}`;
-  //     axios.get(location)
-  //       .then(loc => {
-  //         const locDataLat = loc.data.latitude;
-  //         const locDataLng = loc.data.longitude;
-  //         console.log('locDataLat: ', locDataLat)
-  //         console.log('locDataLng: ', locDataLng)
-  //         console.log('loc: ', loc.data)
 
-  //       })
-  //     })
-  // console.log(gLoc);
-  getLocation = () => {
-    console.log('###Firing IP request...')
-    axios.get('https://api.ipify.org?format=json')
-    .then(response => {
-      console.log('###IP response: ', response.data.ip)
-      return response.data.ip})
-      .then(data => {
-        const location = `https://freegeoip.app/json/${data}`;
-        console.log('###IP Geo Search: ', location)
-        axios.get(location)
-        .then(loc => {
-          const locDataLat = loc.data.latitude;
-          const locDataLng = loc.data.longitude;
-          const templateVars = {lat: locDataLat, lng: locDataLng};
-          console.log('###templateVars: ', templateVars)
-          res.render("index", templateVars);
-        })
-    });
-  };
-  // res.render("index");
+app.get("/", (req, res) => {
+  axios.get('https://api.ipify.org?format=json')
+  .then(response => response.data.ip)
+  .then(data => {
+    const location = `https://freegeoip.app/json/${data}`;
+    axios.get(location)
+      .then(loc => {
+        res.render("index", {lat: loc.data.latitude, lng: loc.data.longitude});
+      })
+  })
 });
 
 app.listen(PORT, () => {
