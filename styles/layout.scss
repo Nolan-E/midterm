@@ -1,9 +1,26 @@
 // See: https://sass-lang.com/
-
 body {
+  height: 85vh;
+  width: 90vw;
   background-color: #EEE;
 
   h1 {
     color: #244751;
   }
+}
+// Leaflet map styling
+.map-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.map-sidebar {
+  flex-grow: 1;
+  height: 100%;
+}
+
+#mapid {
+  flex-grow: 2;
+  height: 100%;
 }

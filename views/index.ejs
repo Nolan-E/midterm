@@ -6,15 +6,42 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
   </head>
 
   <body>
     <h1>Hello World!</h1>
+    <p>MAP HERE</p>
+    <section class="map-container">
+      <div class="map-sidebar"></div>
+      <div id="mapid"></div>
+    </section>
+    <script>
+      const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
+      L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
+        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+      }).addTo(mymap);
+      $(document).ready(function() {
+        $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+          .then(res =>
+          $.ajax(`https://freegeoip.app/json/${res.ip}`))
+            .then(res => {
+              console.log(res);
+              const lat = res.latitude;
+              const long = res.longitude;
+              mymap.setView([lat,long], 13);
+            });
+      });
+    </script>
   </body>
 </html>
