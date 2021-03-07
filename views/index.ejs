@@ -31,6 +31,17 @@
       L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
         attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
       }).addTo(mymap);
+      $(document).ready(function() {
+        $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+          .then(res =>
+          $.ajax(`https://freegeoip.app/json/${res.ip}`))
+            .then(res => {
+              console.log(res);
+              const lat = res.latitude;
+              const long = res.longitude;
+              mymap.setView([lat,long], 13);
+            });
+      });
     </script>
   </body>
 </html>

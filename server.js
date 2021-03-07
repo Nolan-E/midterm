@@ -49,15 +49,15 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  axios.get('https://api.ipify.org?format=json')
-  .then(response => response.data.ip)
-  .then(data => {
-    const location = `https://freegeoip.app/json/${data}`;
-    axios.get(location)
-      .then(loc => {
-        res.render("index", {lat: loc.data.latitude, lng: loc.data.longitude});
-      })
-  })
+  // axios.get('https://api.ipify.org?format=json')
+  // .then(response => response.data.ip)
+  // .then(data => {
+  //   const location = `https://freegeoip.app/json/${data}`;
+  //   axios.get(location)
+  //     .then(loc => {
+  //     })
+  //   })
+    res.render("index");
 });
 
 app.listen(PORT, () => {
