@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
-const axios = require('axios');
+//const axios = require('axios');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -49,7 +49,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-    res.render("index");
+  res.render("index");
 });
 
 app.listen(PORT, () => {

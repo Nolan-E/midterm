@@ -16,10 +16,13 @@
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-<<<<<<< HEAD
-
-    <!-- App JS -->
-    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body id="body">
@@ -215,52 +218,34 @@
       </div>
       <div id="map-area">
         <h1>Map Area</h1>
+        <section class="map-container">
+          <div class="map-sidebar"></div>
+          <div id="mapid"></div>
+        </section>
+        <script>
+          const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
+          L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+          }).addTo(mymap);
+          $(document).ready(function() {
+            $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+              .then(res =>
+              $.ajax(`https://freegeoip.app/json/${res.ip}`))
+                .then(res => {
+                  console.log(res);
+                  const lat = res.latitude;
+                  const long = res.longitude;
+                  mymap.setView([lat,long], 13);
+                });
+          });
+        </script>
       </div>
     </div>
-
-
 
 
     <!-- For Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-=======
-    <script type="text/javascript" src="/scripts/app.js"></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-   crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-   crossorigin=""></script>
-
-  </head>
-
-  <body>
-    <h1>Hello World!</h1>
-    <p>MAP HERE</p>
-    <section class="map-container">
-      <div class="map-sidebar"></div>
-      <div id="mapid"></div>
-    </section>
-    <script>
-      const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
-      L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
-        attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-      }).addTo(mymap);
-      $(document).ready(function() {
-        $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
-          .then(res =>
-          $.ajax(`https://freegeoip.app/json/${res.ip}`))
-            .then(res => {
-              console.log(res);
-              const lat = res.latitude;
-              const long = res.longitude;
-              mymap.setView([lat,long], 13);
-            });
-      });
-    </script>
->>>>>>> 44b9b0487df784c3cd36d7df222be5c2bd9a3d49
   </body>
 </html>
