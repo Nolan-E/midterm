@@ -7,21 +7,11 @@
 
 const express = require('express');
 const router  = express.Router();
-
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        console.log(data.rows);
-        const users = data.rows;
-        res.json({ users });
-        console.log(users);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+router.get("/", (req, res) => {
+  res.json({
+    checking: ' it works',
+    ueser: 'wouldn\'t you like to know'
   });
-  return router;
-};
+});
+
+module.exports = router;

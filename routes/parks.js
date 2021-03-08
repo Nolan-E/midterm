@@ -1,19 +1,10 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM parks;`)
-      .then(data => {
-        console.log(data.rows);
-        const parks = data.rows;
-        res.json({ parks });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-  return router;
-};
+router.get("/", (req, res) => {
+  const test = {parks: 'this is going to be a object with valuable info at some point'};
+  console.log(test);
+  res.json(test);
+});
+
+module.exports = router;
