@@ -63,3 +63,40 @@ A web app that allows users to collaboratively create maps which list multiple "
 - 
 
 
+
+### Format of geoJSON object to be rendered when a user clicks on a map
+const home = [51.1391, -114.2002];
+const mymap = L.map('mapid').setView(home, 14);
+
+L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KSgZl5R174SBURmzIIyg', {
+  attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+}).addTo(mymap);
+const centre = L.marker(home).addTo(mymap);
+
+const data_points = {
+  "type": "FeatureCollection",
+  "name": "test-points-short-named",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+  { "type": "Feature", "properties": { "name": "Dog Park A", "description": "AAA" }, "geometry": { "type": "Point", "coordinates": [ -114.19687271118165, 51.15049396880196 ] } },
+  { "type": "Feature", "properties": { "name": "Dog Park B", "description": "BBB" }, "geometry": { "type": "Point", "coordinates": [ -114.17850494384767, 51.147801909622714 ] } },
+  { "type": "Feature", "properties": { "name": "Dog Park C", "description": "CCC" }, "geometry": { "type": "Point", "coordinates": [ -114.17678833007814, 51.13649354621719 ] } },
+  { "type": "Feature", "properties": { "name": "Dog Park D", "description": "DDD" }, "geometry": { "type": "Point", "coordinates": [ -114.19292449951173, 51.12895309822599 ] } }
+  ]
+};
+
+## This is the logic that takes the above geoJSON object and renders it on the actual map in the browser
+const pointLayer = L.geoJSON(null, {
+  pointToLayer: function(feature, latlng) {
+    const label = String(feature.properties.name)
+    const description = String(feature.properties.description)
+    return new L.marker(latlng)
+      .bindTooltip(label, {permanent: true, opacity: 0.7})
+      .openTooltip()
+      .bindPopup(`<b>${label}</b><br>${description}`).openPopup()
+      .on('mouseover', function (e) {this.openPopup()})
+      .on('mouseout', function (e) {this.closePopup()})
+  }
+});
+pointLayer.addData(data_points);
+mymap.addLayer(pointLayer);
