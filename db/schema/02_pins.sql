@@ -1,4 +1,4 @@
--- Drop and recreate Widgets table (Example)
+-- Drop and recreate pins table
 
 DROP TABLE IF EXISTS pins CASCADE;
 CREATE TABLE pins (
@@ -6,5 +6,6 @@ CREATE TABLE pins (
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  location POINT
+  lat FLOAT NOT NULL,
+  lng FLOAT NOT NULL
 );

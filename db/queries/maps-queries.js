@@ -27,3 +27,10 @@ const getAllMapsByUser = (userID) => {
       return response.rows[0];
     });
 };
+
+
+// select users.name as user_name, maps.name as map_name, pins.*
+// from pins
+// join maps on pins.map_id = maps.id
+// join users on maps.user_id = users.id
+// where users.name LIKE 'Alice';

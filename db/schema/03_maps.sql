@@ -1,4 +1,4 @@
--- Creates maps table
+-- Drop and create maps table
 
 DROP TABLE IF EXISTS maps CASCADE;
 CREATE TABLE maps (

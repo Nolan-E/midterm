@@ -1,4 +1,4 @@
--- Creates pin_reviews table
+-- Drop and create pin_reviews table
 
 DROP TABLE IF EXISTS pin_reviews CASCADE;
 CREATE TABLE pin_reviews (
