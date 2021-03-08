@@ -235,6 +235,15 @@
                   const long = res.longitude;
                   mymap.setView([lat,long], 13);
                 });
+            mymap.on('click', function(e) {
+              console.log(e.latlng);
+              const lat = e.latlng.lat;
+              const long = e.latlng.lng;
+              let marker = L.marker([lat,long]).addTo(this)
+              marker.bindPopup(`<span>hey im poppin here</span><br> Lat:${lat}  Long:${long}`);
+              marker.on('mouseover', () => marker.openPopup());
+              marker.on('mouseout', () => marker.closePopup());
+              });
           });
         </script>
       </div>
