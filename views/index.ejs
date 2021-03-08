@@ -6,7 +6,8 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" type="text/css" />
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <!-- App CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -22,6 +23,9 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+
     <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
   </head>
 
@@ -166,6 +170,14 @@
           L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
             attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
           }).addTo(mymap);
+          const helloPopup = L.popup().setContent('Hello World!');
+          L.easyButton(`<span class= "material-icons">get_app</span> `, function(btn, map){
+            $.ajax({
+              url:"/",
+              method:'POST'})
+              .then(res => console.log('this is getting somewhere'));
+          helloPopup.setLatLng(map.getCenter()).openOn(map);
+          }).addTo(mymap );
           $(document).ready(function() {
             $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
               .then(res =>
@@ -192,6 +204,7 @@
 
                 marker.getPopup().setContent(`newcoords = ${newlatlng}`).update();
               });
+
 
               });
           });
