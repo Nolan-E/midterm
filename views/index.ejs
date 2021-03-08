@@ -161,6 +161,32 @@
         <section class="map-container">
           <div id="mapid"></div>
         </section>
+        <script>
+          const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
+          L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
+            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+          }).addTo(mymap);
+          $(document).ready(function() {
+            $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+              .then(res =>
+              $.ajax(`https://freegeoip.app/json/${res.ip}`))
+                .then(res => {
+                  console.log(res);
+                  const lat = res.latitude;
+                  const long = res.longitude;
+                  mymap.setView([lat,long], 13);
+                });
+            mymap.on('click', function(e) {
+              console.log(e.latlng);
+              const lat = e.latlng.lat;
+              const long = e.latlng.lng;
+              let marker = L.marker([lat,long]).addTo(this)
+              marker.bindPopup(`<span>hey im poppin here</span><br> Lat:${lat}  Long:${long}`);
+              marker.on('mouseover', () => marker.openPopup());
+              marker.on('mouseout', () => marker.closePopup());
+              });
+          });
+        </script>
       </div>
     </div>
 
