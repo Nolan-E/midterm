@@ -1,9 +1,9 @@
-
+-- Drop and create maps table
 
 DROP TABLE IF EXISTS maps CASCADE;
 CREATE TABLE maps (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255),
-  user_id INTEGER REFERENCES users(id),
-  date_created TIMESTAMP
+  name VARCHAR(255) NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  date_created TIMESTAMP NOT NULL
 );
