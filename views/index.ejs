@@ -180,10 +180,19 @@
               console.log(e.latlng);
               const lat = e.latlng.lat;
               const long = e.latlng.lng;
-              let marker = L.marker([lat,long]).addTo(this)
+              let marker = L.marker([lat,long], {
+                draggable: true
+              })
+              .addTo(this)
               marker.bindPopup(`<span>hey im poppin here</span><br> Lat:${lat}  Long:${long}`);
               marker.on('mouseover', () => marker.openPopup());
               marker.on('mouseout', () => marker.closePopup());
+              marker.on('moveend', function(e) {console.log(marker.getLatLng())
+                let newlatlng = marker.getLatLng();
+
+                marker.getPopup().setContent(`newcoords = ${newlatlng}`).update();
+              });
+
               });
           });
         </script>
