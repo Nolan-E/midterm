@@ -27,61 +27,6 @@
 
   <body id="body">
 
-
-
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Dog Parks</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="navbar-nav mr-auto">
-          <div id="nav-left">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Explore Maps</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                My Favorite Maps
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Parks When I'm Sad</a>
-                <a class="dropdown-item" href="#">Parks When I'm Less Sad</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Every Other Day</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                My Maps
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Riverside Parks</a>
-                <a class="dropdown-item" href="#">Downtown Parks</a>
-                <a class="dropdown-item" href="#">Northwest Parks</a>
-              </div>
-            </li>
-
-          </div>
-
-
-
-
-        </ul>
-        <div class="form-group my-2 my-lg-0" id="nav-right">
-          <a class="nav-item nav-link" href="#">First Last</a>
-          <a class="nav-item nav-link" href="#">Register</a>
-          <a class="nav-item nav-link" href="#">Login</a>
-          <a class="nav-item nav-link" href="#">Logout</a>
-        </div>
-      </div>
-    </nav> -->
-
-
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Wiki Maps</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,14 +61,12 @@
                     <a class="dropdown-item" href="#">South East Parks</a>
                   </div>
                 </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="#" id="nav-create-map">Create Map</a>
+                </li>
               </ul>
             </div>
           </div>
-
-
-
-
-
 
           <div id="nav-right">
             <a class="nav-item nav-link" href="#">First Last</a>
@@ -212,34 +155,19 @@
           <div class="card-footer bg-transparent border-success text-muted">Jack Black</div>
         </div>
 
-
-
-
       </div>
+
       <div id="map-area">
         <section class="map-container">
           <div id="mapid"></div>
         </section>
-        <script>
-          const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
-          L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
-            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-          }).addTo(mymap);
-          $(document).ready(function() {
-            $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
-              .then(res =>
-              $.ajax(`https://freegeoip.app/json/${res.ip}`))
-                .then(res => {
-                  console.log(res);
-                  const lat = res.latitude;
-                  const long = res.longitude;
-                  mymap.setView([lat,long], 13);
-                });
-          });
-        </script>
       </div>
     </div>
 
+
+    <script type="text/javascript" src="/scripts/nav-create-map.js"></script>
+    <script type="text/javascript" src="/scripts/leaflet-render-map.js"></script>
+    <script type="text/javascript" src="/scripts/leaflet-submit-map.js"></script>
 
     <!-- For Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
