@@ -1,12 +1,19 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
-  router.post("/", (req, res) => {
-    console.log('the / post route');
-    return res.status(200).send('ok');
 
-
+//maps GET Routes
+router.get("/", (req, res) => {
+  res.json({
+    checking: ' it works',
+    lat : 'lat here in decimal',
+    long : 'lng here in decimal'
   });
-  return router;
-};
+});
+
+
+router.post("/", (req, res) => {
+  res.status(200).send('ok');
+});
+
+module.exports = router;
