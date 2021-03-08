@@ -232,7 +232,7 @@
           const helloPopup = L.popup().setContent('Hello World!');
           L.easyButton(`<span class= "material-icons">get_app</span> `, function(btn, map){
             $.ajax({
-              url:"/",
+              url:"/maps",
               method:'POST'})
               .then(res => console.log('this is getting somewhere'));
           helloPopup.setLatLng(map.getCenter()).openOn(map);
