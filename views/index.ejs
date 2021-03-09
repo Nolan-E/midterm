@@ -129,36 +129,36 @@
               .then(res => console.log('this is getting somewhere'));
           helloPopup.setLatLng(map.getCenter()).openOn(map);
           }).addTo(mymap );
-          $(document).ready(function() {
-            $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
-              .then(res =>
-              $.ajax(`https://freegeoip.app/json/${res.ip}`))
-                .then(res => {
-                  console.log(res);
-                  const lat = res.latitude;
-                  const long = res.longitude;
-                  mymap.setView([lat,long], 13);
-                });
-            mymap.on('click', function(e) {
-              console.log(e.latlng);
-              const lat = e.latlng.lat;
-              const long = e.latlng.lng;
-              let marker = L.marker([lat,long], {
-                draggable: true
-              })
-              .addTo(this)
-              marker.bindPopup(`<span>hey im poppin here</span><br> Lat:${lat}  Long:${long}`);
-              marker.on('mouseover', () => marker.openPopup());
-              marker.on('mouseout', () => marker.closePopup());
-              marker.on('moveend', function(e) {console.log(marker.getLatLng())
-                let newlatlng = marker.getLatLng();
+          // $(document).ready(function() {
+          //   $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+          //     .then(res =>
+          //     $.ajax(`https://freegeoip.app/json/${res.ip}`))
+          //       .then(res => {
+          //         console.log(res);
+          //         const lat = res.latitude;
+          //         const long = res.longitude;
+          //         mymap.setView([lat,long], 13);
+          //       });
+          //   mymap.on('click', function(e) {
+          //     console.log(e.latlng);
+          //     const lat = e.latlng.lat;
+          //     const long = e.latlng.lng;
+          //     let marker = L.marker([lat,long], {
+          //       draggable: true
+          //     })
+          //     .addTo(this)
+          //     marker.bindPopup(`<span>hey im poppin here</span><br> Lat:${lat}  Long:${long}`);
+          //     marker.on('mouseover', () => marker.openPopup());
+          //     marker.on('mouseout', () => marker.closePopup());
+          //     marker.on('moveend', function(e) {console.log(marker.getLatLng())
+          //       let newlatlng = marker.getLatLng();
 
-                marker.getPopup().setContent(`newcoords = ${newlatlng}`).update();
-              });
+          //       marker.getPopup().setContent(`newcoords = ${newlatlng}`).update();
+          //     });
 
 
-              });
-          });
+          //     });
+          // });
         </script>
       </div>
     </div>

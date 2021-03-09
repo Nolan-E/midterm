@@ -52,5 +52,6 @@ const pointLayer = L.geoJSON(null, {
       });
   }
 });
-pointLayer.addData(data_points);
-mymap.addLayer(pointLayer);
+//pointLayer.addData(data_points);
+//mymap.addLayer(pointLayer);
+
