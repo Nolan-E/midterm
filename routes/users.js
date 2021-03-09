@@ -14,4 +14,14 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/login", (req, res) => {
+  res.render('../views/login')
+})
+
+router.post("/login", (req, res) => {
+  // req.session.user_id = req.params.id
+  console.log('ok')
+  res.send('ok')
+})
+
 module.exports = router;
