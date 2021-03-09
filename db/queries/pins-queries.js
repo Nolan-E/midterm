@@ -10,9 +10,8 @@ const createPin = (mapID, pin) => {
       INSERT INTO pins (map_id, lat, lng, title, description)
       VALUES ($1, $2, $3, $4, $5);`, [mapID, lat, lng, pinProp.name, pinProp.description]
     )
-      .then((response) => {
-        return response.rows[0];
-      });
+    .then(response => response.rows[0])
+    .catch(err => null);
 };
 
 // Loop through geoJSON of many pins
