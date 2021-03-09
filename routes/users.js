@@ -19,9 +19,8 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-  // req.session.user_id = req.params.id
-  console.log('ok')
-  res.send('ok')
+  req.session.user_id = req.params.id
+  res.redirect('/')
 })
 
 module.exports = router;
