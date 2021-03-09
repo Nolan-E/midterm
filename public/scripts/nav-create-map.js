@@ -1,12 +1,3 @@
-// Helper Function
-// function chunkArray(myArray, chunk_size){
-//   const results = [];
-//   while (myArray.length) {
-//       results.push(myArray.splice(0, chunk_size));
-//   }
-//   return results;
-// };
-
 function chunkArray(myArray, chunk_size){
   const results = [];
   while (myArray.length) {
