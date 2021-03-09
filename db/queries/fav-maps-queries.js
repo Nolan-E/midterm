@@ -14,6 +14,16 @@ const getAllFavMaps = (userID) => {
   .then(response => response.rows);
 };
 
+// Add a map to my fav maps
+const addToMyFav = (userID, mapID, rating, review) => {
+  return db.query(`
+    INSERT INTO fav_maps (user_id, map_id, rating, review, fav_date)
+    VALUES ($1, $2, $3, $4, current_timestamp);`, [userID, mapID, rating, review]
+  )
+  .then(response => response.rows[0])
+  .catch(err => null);
+};
+
 //EXPORT FUNCTIONS
 module.exports = {
   getAllFavMaps
