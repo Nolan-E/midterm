@@ -23,6 +23,7 @@ router.post("/login", (req, res) => {
         alert("Invalid username or password.");
       } else {
         req.session.user_id = data.name;
+        req.session.email = data.email;
         res.send(data.name);
       }
     })

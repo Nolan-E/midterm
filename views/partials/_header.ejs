@@ -40,10 +40,13 @@
       </div>
 
       <div id="nav-right">
-        <a id="nav-user-profile" class="nav-item nav-link d-none" href="#">First Last</a>
+        <% if (!currentUser) {%>
         <a id="nav-register" class="nav-item nav-link" href="#">Register</a>
         <a id="nav-login-form" class="nav-item nav-link" href="#">Login</a>
+        <% } else {%>
+        <a id="nav-user-profile" class="nav-item nav-link d-none" href="#">First Last</a>
         <a id="nav-logout" class="nav-item nav-link d-none" href="#">Logout</a>
+        <% }%>
       </div>
     </div>
   </div>
