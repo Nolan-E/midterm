@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 //dumy data
-const data_points = {
+const dataPoints = {
   "type": "FeatureCollection",
   "name": "test-points-short-named",
   "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
@@ -76,7 +76,7 @@ router.get('/favorites', (req, res) => {
 
 //will get map by name
 router.get("/:id", (req,res) => {
-  res.json(data_points);
+  res.json(dataPoints);
 });
 
 
