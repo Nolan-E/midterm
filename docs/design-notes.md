@@ -18,7 +18,7 @@ top choices
 # Project plaining
   ## links
     - document for thoughts : https://docs.google.com/document/d/1we365uMIPoxY35Rn6p5TIyCN1LO1TMWIjFaaTMQT_Mk/edit
-    - ERD diagram : https://drive.google.com/file/d/17OM-rn20nCYDfkHEG_hKz_cy9Nx9yIMT/view?usp=sharing
+    - ERD diagram : https://drive.google.com/file/d/1XGPsAcBolQjBtkf3b5u2Mk5wsaN2ejoT/view?usp=sharing
     - Design layout: https://docs.google.com/spreadsheets/d/1poEk030q8nxWQo76y-BwGw42YzaRCpxXLXxwGFF0hyo/edit#gid=0
 ## projects desc.
 A web app that allows users to collaboratively create maps which list multiple "points". For example: "Best Places to Eat Around Town" or "Locations of Movie Scenes".
