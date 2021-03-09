@@ -15,18 +15,18 @@ const getAllPinReviews = (userID) => {
   .catch(err => null);
 };
 
-// // Add a map to my fav maps
-// const addToMyFav = (userID, mapID, rating, review) => {
-//   return db.query(`
-//     INSERT INTO fav_maps (user_id, map_id, rating, review, fav_date)
-//     VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [userID, mapID, rating, review]
-//   )
-//   .then(response => response.rows[0])
-//   .catch(err => null);
-// };
+// Add a new review to pin reviews
+const createNewPinReview = (userID, pinID, pinRevObj) => {
+  return db.query(`
+    INSERT INTO pin_reviews (pin_id, user_id, stars, message, date_created)
+    VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [pinID, userID, pinRevObj.stars, pinRevObj.message]
+  )
+  .then(response => response.rows[0])
+  .catch(err => null);
+};
 
 //EXPORT FUNCTIONS
 module.exports = {
   getAllPinReviews,
-  // addToMyFav
+  createNewPinReview
 };
