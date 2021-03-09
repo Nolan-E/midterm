@@ -8,9 +8,8 @@ const getAllMapsAnon = () => {
     JOIN users ON maps.user_id = users.id
     ORDER BY map_created DESC;`
   )
-    .then((response) => {
-      return response.rows;
-    });
+  .then(response => response.rows)
+  .catch(err => null);
 };
 // Gets a list of all maps by creator
 const getAllMapsByUser = (userName) => {
@@ -21,9 +20,8 @@ const getAllMapsByUser = (userName) => {
     WHERE users.name = $1
     ORDER BY map_created DESC;`, [userName]
   )
-    .then((response) => {
-      return response.rows;
-    });
+  .then(response => response.rows)
+  .catch(err => null);
 };
 // Gets a map by map_id
 const getMapsByID = (mapID) => {
@@ -33,9 +31,8 @@ const getMapsByID = (mapID) => {
     JOIN users ON maps.user_id = users.id
     WHERE maps.id = $1;`, [mapID]
   )
-    .then((response) => {
-      return response.rows;
-    });
+  .then(response => response.rows)
+  .catch(err => null);
 };
 // Gets a specific map of pins by map_id
 const getMapOfPinsByID = (mapID) => {
@@ -48,9 +45,8 @@ const getMapOfPinsByID = (mapID) => {
     WHERE maps.id = $1
     ORDER BY pin_id;`, [mapID]
   )
-    .then((response) => {
-      return response.rows;
-    });
+  .then(response => response.rows)
+  .catch(err => null);
 };
 
 //EXPORT FUNCTIONS
