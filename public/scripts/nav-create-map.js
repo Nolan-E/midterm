@@ -1,12 +1,3 @@
-// Helper Function
-// function chunkArray(myArray, chunk_size){
-//   const results = [];
-//   while (myArray.length) {
-//       results.push(myArray.splice(0, chunk_size));
-//   }
-//   return results;
-// };
-
 function chunkArray(myArray, chunk_size){
   const results = [];
   while (myArray.length) {
@@ -28,6 +19,8 @@ $(document).ready(function() {
   $("#nav-create-map").on("click", function() {
     $("#map-info-area").empty()
     const createMapCard = `
+      <h1>Explore Maps</h1>
+
       <div class="card border-dark mt-0 mb-1">
         <div class="card-header bg-transparent border-dark">Create a new map</div>
         <div class="card-body text-dark">
