@@ -18,9 +18,24 @@ router.get("/login", (req, res) => {
   res.render('../views/login')
 })
 
+// DUMMY DATA DELETE THIS AFTER WE GET USERS WORKING
+const users = {
+  "userRandomID": {
+    id: "Albert Einstein",
+    email: "a@a",
+    password: "a"
+  }
+};
+
 router.post("/login", (req, res) => {
-  req.session.user_id = req.params.id
-  res.redirect('/')
+  const { email, password } = req.body;
+  for (const id in users) {
+    if (users[id]['email'] === email && users[id]['password'] === password) {
+      req.session.user_id = users[id]['id']
+      return res.redirect('/')
+    }
+  }
+  res.send('Please use email a@a and password a to login');
 })
 
 module.exports = router;
