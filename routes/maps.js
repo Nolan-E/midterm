@@ -3,6 +3,8 @@ const router  = express.Router();
 
 
 //maps GET Routes
+
+//will get all maps for sidebar display on initial load
 router.get("/", (req, res) => {
   res.json({
     checking: ' it works',
@@ -11,8 +13,19 @@ router.get("/", (req, res) => {
   });
 });
 
+//will get all maps for sidedbar that are users favorited maps
+router.get('/favorites', (req, res) => {
+  res.json({has: 'object that is all maps that have favorite'});
 
-router.post("/", (req, res) => {
+});
+
+//will get
+router.get("/:id", (req,res) => {
+  res.json({ has: 'object that is specific map'});
+});
+
+//maps POST Routes
+router.post('/', (req, res) => {
   res.status(200).send('ok');
 });
 
