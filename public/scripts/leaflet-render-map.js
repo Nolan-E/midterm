@@ -1,4 +1,5 @@
-console.log('ok')
+/* eslint-disable no-undef */
+console.log('ok');
 
 // [latitude, longitude, dog_park_title, dog_park_description]
 const queriedPins = [
@@ -9,7 +10,7 @@ const queriedPins = [
   [51.131538533389175, -114.22416687011719, 'Dog Park E', 'description ee'],
   [51.14112492521663, -114.23343658447267, 'Dog Park F', 'description ff'],
   [51.1509246836981, -114.22073364257814, 'Dog Park G', 'description gg']
-]
+];
 
 const home = [51.1391, -114.2002];
 const mymap = L.map('mapid').setView(home, 14);
@@ -31,20 +32,24 @@ for (const queriedPin of queriedPins) {
     "type": "Feature",
     "properties": { "name": `${queriedPin[2]}`, "description": `${queriedPin[3]}` },
     "geometry": { "type": "Point", "coordinates": [ queriedPin[1], queriedPin[0] ] }
-  }
-  data_points['features'].push(pinGeoJSON)
+  };
+  data_points['features'].push(pinGeoJSON);
 }
 
 const pointLayer = L.geoJSON(null, {
   pointToLayer: function(feature, latlng) {
-    const label = String(feature.properties.name)
-    const description = String(feature.properties.description)
+    const label = String(feature.properties.name);
+    const description = String(feature.properties.description);
     return new L.marker(latlng)
       .bindTooltip(label, {permanent: true, opacity: 0.7})
       .openTooltip()
       .bindPopup(`<b>${label}</b><br>${description}`).openPopup()
-      .on('mouseover', function (e) {this.openPopup()})
-      .on('mouseout', function (e) {this.closePopup()})
+      .on('mouseover', function(e) {
+        this.openPopup();
+      })
+      .on('mouseout', function(e) {
+        this.closePopup();
+      });
   }
 });
 pointLayer.addData(data_points);
