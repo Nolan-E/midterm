@@ -19,7 +19,7 @@ const getAllFavMaps = (userID) => {
 const addToMyFav = (userID, mapID, rating, review) => {
   return db.query(`
     INSERT INTO fav_maps (user_id, map_id, rating, review, fav_date)
-    VALUES ($1, $2, $3, $4, current_timestamp);`, [userID, mapID, rating, review]
+    VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [userID, mapID, rating, review]
   )
   .then(response => response.rows[0])
   .catch(err => null);
