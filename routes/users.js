@@ -22,7 +22,8 @@ router.post("/login", (req, res) => {
       if (password !== data.password) {
         alert("Invalid username or password.");
       } else {
-        req.session.user_id = data.name;
+        req.session.user_id = data.id;
+        req.session.user_name = data.name;
         req.session.email = data.email;
         res.send(data.name);
       }

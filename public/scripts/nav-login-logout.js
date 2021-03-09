@@ -8,11 +8,11 @@ $(document).ready(function() {
       <form id="form-login" action="">
         <div class="form-group mb-2 form-inline">
           <label for="email"></label>
-          <input class="form-control" type="email" name="email" placeholder="Email">
+          <input class="form-control" type="email" name="email" placeholder="Email" value="alice@wonderland.com">
         </div>
         <div class="form-group mb-2 form-inline">
           <label for="password"></label>
-          <input class="form-control" type="password" name="password" placeholder="Password">
+          <input class="form-control" type="password" name="password" placeholder="Password" value="plainfornow">
         </div>
         <div class="form-group mb-2">
           <button type="submit" class="btn btn-primary">Log In</button>
@@ -45,7 +45,8 @@ $(document).ready(function() {
   $(document).on("click", "#nav-logout", function(event) {
     event.preventDefault();
     $.get("http://localhost:8080/api/users/logout")
-      .then(() => {
+      .then((data) => {
+        alert(data);
         $("#nav-user-profile").addClass("d-none");
         $("#nav-register").removeClass("d-none");
         $("#nav-login-form").removeClass("d-none");
