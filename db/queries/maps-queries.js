@@ -1,22 +1,28 @@
 const db = require('../../server');
 
-const getAllMaps = () => {
+const getAllMapsAnon = () => {
   return db.query(`
-  SELECT * FROM maps`)
+    SELECT maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by
+    FROM maps
+    JOIN users ON maps.user_id = users.id
+    ORDER BY map_created DESC;`
+  )
     .then((response) => {
       return response.rows;
     });
 };
-
-const getAllMapsByUser = (userID) => {
+const getAllMapsByUser = (userName) => {
   return db.query(`
-    SELECT * FROM maps
-    JOIN users ON users.id = maps.user_id
-    WHERE user_id = $1;`, [userID])
+    SELECT maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by
+    FROM maps
+    JOIN users ON maps.user_id = users.id
+    WHERE users.name = $1
+    ORDER BY map_created DESC;`, [userName]
+  )
     .then((response) => {
       return response.rows;
     });
-  };
+};
 
   const getUserMap = (userID, mapID) => {
     return db.query(`
