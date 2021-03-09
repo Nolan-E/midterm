@@ -26,5 +26,6 @@ const addToMyFav = (userID, mapID, rating, review) => {
 
 //EXPORT FUNCTIONS
 module.exports = {
-  getAllFavMaps
+  getAllFavMaps,
+  addToMyFav
 };
