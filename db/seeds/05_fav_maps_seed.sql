@@ -1,5 +1,5 @@
 -- Fav_maps table seeds here
-INSERT INTO fav_maps (user_id, map_id, rating, review, date_fav)
+INSERT INTO fav_maps (user_id, map_id, rating, review, fav_date)
 VALUES (3, 1, 4, 'Nice!', '1989-03-25T15:30:00.000Z'),
   (4, 2, 5, 'Bomb!!', '1997-12-11T01:21:00.000Z'),
   (6, 3, 3, 'Eh...', '2000-01-04T08:10:00.000Z'),
