@@ -13,12 +13,10 @@ const queriedPins = [
 ];
 
 const home = [51.1391, -114.2002];
-// const mymap = L.map('mapid').setView(home, 14);
-
+const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
 L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KSgZl5R174SBURmzIIyg', {
   attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(mymap);
-const centre = L.marker(home).addTo(mymap);
 
 const data_points = {
   "type": "FeatureCollection",
@@ -41,6 +39,7 @@ const pointLayer = L.geoJSON(null, {
     const label = String(feature.properties.name);
     const description = String(feature.properties.description);
     return new L.marker(latlng)
+    //not functioning below
       .bindTooltip(label, {permanent: true, opacity: 0.7})
       .openTooltip()
       .bindPopup(`<b>${label}</b><br>${description}`).openPopup()
@@ -53,5 +52,19 @@ const pointLayer = L.geoJSON(null, {
   }
 });
 //pointLayer.addData(data_points);
-//mymap.addLayer(pointLayer);
+$(document).ready(function() {
 
+  // will alert user and then contain button to approve use of location or not.
+  alert(`wiki maps would like to use your location \n need to add confirm or deny button`);
+  $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
+    .then(res =>
+      $.ajax(`https://freegeoip.app/json/${res.ip}`))
+    .then(res => {
+      console.log(res);
+      const lat = res.latitude;
+      const long = res.longitude;
+      mymap.setView([lat,long], 13);
+    });
+  mymap.addLayer(pointLayer);
+
+});

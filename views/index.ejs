@@ -116,19 +116,19 @@
         <section class="map-container">
           <div id="mapid"></div>
         </section>
-        <script>
-          const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
-          L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
-            attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-          }).addTo(mymap);
-          const helloPopup = L.popup().setContent('Hello World!');
-          L.easyButton(`<span class= "material-icons">get_app</span> `, function(btn, map){
-            $.ajax({
-              url:"api/maps",
-              method:'POST'})
-              .then(res => console.log('this is getting somewhere'));
-          helloPopup.setLatLng(map.getCenter()).openOn(map);
-          }).addTo(mymap );
+        <!-- <script> -->
+          // const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
+          // L.tileLayer('https://api.maptiler.com/maps/streets/256/{z}/{x}/{y}.png?key=VOUVJ6EuCCKH8cA2JsJb', {
+          //   attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+          // }).addTo(mymap);
+          // const helloPopup = L.popup().setContent('Hello World!');
+          // L.easyButton(`<span class= "material-icons">get_app</span> `, function(btn, map){
+          //   $.ajax({
+          //     url:"api/maps",
+          //     method:'POST'})
+          //     .then(res => console.log('this is getting somewhere'));
+          // helloPopup.setLatLng(map.getCenter()).openOn(map);
+          // }).addTo(mymap );
           // $(document).ready(function() {
           //   $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
           //     .then(res =>
@@ -159,11 +159,12 @@
 
           //     });
           // });
-        </script>
+        <!-- </script> -->
       </div>
     </div>
 
 
+    <script type="text/javascript" src="/scripts/leaflet-render-map.js"></script>
     <script type="text/javascript" src="/scripts/nav-create-map.js"></script>
     <script type="text/javascript" src="/scripts/nav-explore-maps.js"></script>
     <script type="text/javascript" src="/scripts/nav-user-profile.js"></script>
