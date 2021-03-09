@@ -13,5 +13,26 @@ router.get("/", (req, res) => {
     ueser: 'wouldn\'t you like to know'
   });
 });
+const { getUserWithEmail } = require('../db//queries/users-queries');
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+  getUserWithEmail(email)
+    .then(data => {
+      if (password !== data.password) {
+        alert("Invalid username or password.");
+      } else {
+        req.session.user_id = data.name;
+        req.session.email = data.email;
+        res.send(data.name);
+      }
+    })
+    .catch(() => res.status(401).send('Login error.'));
+})
+
+router.get("/logout", (req, res) => {
+  req.session = null;
+  res.send("Successfully logged out.")
+})
 
 module.exports = router;
