@@ -99,8 +99,8 @@ router.post('/', (req, res) => {
   const submition = req.body.map;
   createNewMap(1,submition.name)
     .then(res => {
-      console.log(res);
-      manyPins(res.id,submition.pins);
+      console.log(submition.pins);
+      manyPins(res.id, submition.pins);
 
     })
     .finally(res.status(200).send('ok'));
