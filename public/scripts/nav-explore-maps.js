@@ -1,10 +1,6 @@
-const url = "http://localhost:8080/api/maps";
-
-$(document).ready(function() {
-
-  $("#nav-explore-maps").on("click", function() {
-    $("#map-info-area").empty()
-    $.get(url, function(e) {
+const showExploreMaps = () => {
+  $("#map-info-area").empty()
+    $.get("http://localhost:8080/api/maps", function(e) {
       const mapCardName = e['checking'];
       const mapCardAuthor = e['lat'];
       const mapCardRating = e['long'];
@@ -35,11 +31,8 @@ $(document).ready(function() {
       `;
       $("#map-info-area").append(mapCards)
     })
+};
 
-
-
-
-
-
-  })
+$(document).ready(function() {
+  $("#nav-explore-maps").on("click", showExploreMaps)
 })

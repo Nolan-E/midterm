@@ -13,31 +13,25 @@ router.get("/", (req, res) => {
     ueser: 'wouldn\'t you like to know'
   });
 });
-
-router.get("/login", (req, res) => {
-  res.render('../views/login')
-})
-
-// DUMMY DATA DELETE THIS AFTER WE GET USERS WORKING
-const users = {
-  "userRandomID": {
-    id: "Albert Einstein",
-    email: "a@a",
-    password: "a"
-  }
-};
+const { getUserWithEmail } = require('../db//queries/users-queries');
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  for (const id in users) {
-    if (users[id]['email'] === email && users[id]['password'] === password) {
-      req.session.user_id = users[id]['id']
-      return res.redirect('/')
-    }
-  }
-  res.send('Please use email a@a and password a to login');
+  getUserWithEmail(email)
+    .then(data => {
+      if (password !== data.password) {
+        alert("Invalid username or password.");
+      } else {
+        req.session.user_id = data.name;
+        res.send(data.name);
+      }
+    })
+    .catch(() => res.status(401).send('Login error.'));
+})
+
+router.get("/logout", (req, res) => {
+  req.session = null;
+  res.send("Successfully logged out.")
 })
 
 module.exports = router;
-
-//

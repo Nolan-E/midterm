@@ -37,6 +37,12 @@ app.use(cookieSession({
   secret: "aSuperSecretSecretForCookies!",
 }));
 
+app.use((req, res, next) => {
+  console.log('req user is', req.user)
+  res.locals.currentUser = req.user;
+  next();
+})
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
