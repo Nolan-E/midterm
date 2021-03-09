@@ -52,8 +52,8 @@ const getMapOfPinsByID = (mapID) => {
 const createNewMap = (userID, mapName) => {
   return db.query(`
   INSERT INTO maps (name, user_id, date_created)
-  VALUES ($1, $2, $3) RETURNING maps.id;
-  `, [userID, mapName, current_timestamp])
+  VALUES ($1, $2, current_timestamp) RETURNING maps.id;
+  `, [userID, mapName])
   .then(response => response.rows[0])
   .catch(err => null);
 };
