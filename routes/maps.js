@@ -74,7 +74,7 @@ router.get('/favorites', (req, res) => {
 
 });
 
-//will get
+//will get map by name
 router.get("/:id", (req,res) => {
   res.json(data_points);
 });
