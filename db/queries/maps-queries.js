@@ -48,11 +48,21 @@ const getMapOfPinsByID = (mapID) => {
   .then(response => response.rows)
   .catch(err => null);
 };
+// Save new map to database
+const createNewMap = (userID, mapName) => {
+  return db.query(`
+  INSERT INTO maps (name, user_id, date_created)
+  VALUES ($1, $2, $3) RETURNING maps.id;
+  `, [userID, mapName, current_timestamp])
+  .then(response => response.rows[0])
+  .catch(err => null);
+};
 
 //EXPORT FUNCTIONS
 module.exports = {
   getAllMapsAnon,
   getAllMapsByUser,
   getMapsByID,
-  getMapOfPinsByID
+  getMapOfPinsByID,
+  createNewMap
 };
