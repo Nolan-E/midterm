@@ -11,7 +11,8 @@ const getAllFavMaps = (userID) => {
     WHERE users.id = $1
     ORDER BY fav_date DESC;`, [userID]
   )
-  .then(response => response.rows);
+  .then(response => response.rows)
+  .catch(err => null);
 };
 
 // Add a map to my fav maps
