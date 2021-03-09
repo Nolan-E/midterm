@@ -1,3 +1,5 @@
+// populates side bar with info from pin drops.
+
 const Arr = [];
 let i = 0;
 

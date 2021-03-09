@@ -1,5 +1,16 @@
 const express = require('express');
 const router  = express.Router();
+const {
+  getAllMapsAnon,
+  getAllMapsByUser,
+  getMapsByID,
+  getMapOfPinsByID,
+  createNewMap
+} = require('../db/queries/maps-queries');
+const {createPin,
+  manyPins
+} = require('../db/queries/pins-queries.js');
+
 //dumy data
 const dataPoints = {
   "type": "FeatureCollection",
@@ -84,7 +95,16 @@ router.get("/:id", (req,res) => {
 
 //will recive geojson and user helper function and queries to insert into db
 router.post('/', (req, res) => {
-  res.status(200).send('ok');
+  console.log(req.body.map);
+  const submition = req.body.map;
+  createNewMap(1,submition.name)
+    .then(res => {
+      console.log(res);
+      manyPins(res.id,submition.pins);
+
+    })
+    .finally(res.status(200).send('ok'));
+
 });
 
 router.post('/edit', (req, res) => {
