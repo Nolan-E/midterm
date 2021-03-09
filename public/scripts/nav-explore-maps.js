@@ -5,7 +5,6 @@ $(document).ready(function() {
   $("#nav-explore-maps").on("click", function() {
     $("#map-info-area").empty()
     $.get(url, function(e) {
-      console.log(e)
       const mapCardName = e['checking'];
       const mapCardAuthor = e['lat'];
       const mapCardRating = e['long'];
