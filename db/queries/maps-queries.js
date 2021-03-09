@@ -25,11 +25,11 @@ const getAllMapsByUser = (userName) => {
     });
 };
 
-  const getUserMap = (userID, mapID) => {
+  const getUserMap = (userName, mapID) => {
     return db.query(`
     SELECT * FROM maps
     JOIN users ON users.id = maps.user_id
-    WHERE users_id = $1 AND maps.id = $2;`, [userID, mapID])
+    WHERE users_id = $1 AND maps.id = $2;`, [userName, mapID])
     .then((response) => {
       return response.rows[0];
     });
