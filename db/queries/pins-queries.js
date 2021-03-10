@@ -9,9 +9,9 @@ const createPin = (mapID, pin) => {
    `INSERT INTO pins (map_id, lat, lng, title, description, image_url)
     VALUES ($1, $2, $3, $4, $5`;
     if (pin.imgURL === undefined || !pin.imgURL.trim()) {
-      queryString += `, default);`;
+      queryString += `, default) RETURNING *;`;
     } else {
-      queryString += `, $6);`;
+      queryString += `, $6) RETURNING *;`;
       queryParams.push(pin.imgURL.trim());
     }
   return db.query(queryString, queryParams)
