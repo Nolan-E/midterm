@@ -14,6 +14,7 @@ const {
 const {createPin,
   manyPins
 } = require('../db/queries/pins-queries.js');
+const {isLoggedIn} = require('../public/scripts/middleware');
 
 //dumy data
 // const dataPoints = {
@@ -89,8 +90,9 @@ router.get("/", (req, res) => {
 });
 
 router.get('/mymaps', (req, res) => {
-  getAllMapsByUser(req.session.user_id)
+  getAllMapsByUser(req.session.user_name)
     .then(data => {
+      console.log(data)
       res.send(data);
     })
 });
@@ -99,6 +101,7 @@ router.get('/mymaps', (req, res) => {
 router.get('/favorites', (req, res) => {
   getAllFavMaps(req.session.user_id)
   .then(data => {
+    console.log('Retrieving favorite maps...', data)
     res.send(data);
   })
   // res.json({has: 'object that is all maps that have favorite'});
@@ -106,7 +109,16 @@ router.get('/favorites', (req, res) => {
 
 //will get map by name
 router.get("/:id", (req,res) => {
-  res.json(dataPoints);
+  const { id } = req.params;
+  getMapOfPinsByID(id)
+    .then(data => {
+      console.log('Retrieving...', data)
+      res.json(data)
+
+    })
+
+
+  // res.json(dataPoints);
 });
 
 
@@ -124,6 +136,16 @@ router.post('/', (req, res) => {
     })
     .finally(res.status(200).send('ok'));
 
+});
+
+router.post('/addtofavorites', (req, res) => {
+  console.log('body', req.body);
+  console.log('params', req.params)
+  const { id } = req.session;
+
+  // addToMyFav(userID, mapID)
+  console.log('ok');
+  res.send('ok 2')
 });
 
 router.post('/edit', (req, res) => {
