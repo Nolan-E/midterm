@@ -38,11 +38,7 @@ app.use(cookieSession({
 }));
 
 app.use((req, res, next) => {
-<<<<<<< HEAD
-  console.log('req user is', req.session)
-=======
   console.log('req.session is', req.session)
->>>>>>> 53259f0e2a5a3b904bef36faf8afb40917308c17
   res.locals.currentUser = req.session.user_name;
   next();
 })
