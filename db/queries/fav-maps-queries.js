@@ -13,18 +13,18 @@ const getAllFavMaps = (userID) => {
   GROUP BY maps.id, users.name, pins.image_url, fav_maps.map_id, fav_maps.rating, fav_maps.review, fav_maps.fav_date
   ORDER BY fav_date DESC;`, [userID]
   )
-  .then(response => response.rows)
-  .catch(err => err);
+    .then(response => response.rows)
+    .catch(err => err);
 };
 
 // Add a map to my fav maps
-const addToMyFav = (userID, mapID, rating, review) => {
+const addToMyFav = (userID, mapID) => {
   return db.query(`
-    INSERT INTO fav_maps (user_id, map_id, rating, review, fav_date)
-    VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [userID, mapID, rating, review]
+    INSERT INTO fav_maps (user_id, map_id, fav_date)
+    VALUES ($1, $2, current_timestamp) RETURNING *;`, [userID, mapID]
   )
-  .then(response => response.rows[0])
-  .catch(err => err);
+    .then(response => response.rows[0])
+    .catch(err => err);
 };
 
 //EXPORT FUNCTIONS
