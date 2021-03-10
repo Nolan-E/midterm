@@ -35,11 +35,10 @@ const pointLayer = L.geoJSON(null, {
   pointToLayer: function(feature, latlng) {
     const label = String(feature.properties.name);
     const description = String(feature.properties.description);
-    return new L.marker(latlng)
-    //not functioning below
-      .bindTooltip(label, {permanent: true, opacity: 0.7})
-      .openTooltip()
-      .bindPopup(`<b>${label}</b><br>${description}`).openPopup()
+    L.marker(latlng)
+      // .bindTooltip(label, {permanent: true, opacity: 0.7})
+      // .openTooltip()
+      marker.bindPopup(`<b>${label}</b><br>${description}`).openPopup()
       .on('mouseover', function(e) {
         this.openPopup();
       })
