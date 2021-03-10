@@ -13,6 +13,7 @@ const showFavoriteMaps = () => {
             <form class="form-map-name">
               <input type="hidden" name="map_id" value="${map.map_id}">
               <button class="button-map-name" type="submit">${map.map_name}</button>
+              <button class="button-see-reviews" type="submit">See Reviews</button>
             </form>
 
             <small id="map-author-rating">
@@ -70,8 +71,12 @@ $(document).ready(function() {
         console.log('mapdetails are', mapDetails[0]);
         showMapDetails(mapDetails[0]);
       })
-
-
   })
 
+
+  $(document).on("submit", ".button-see-reviews", function(event) {
+    event.preventDefault();
+    const mapId = Number($(this).serializeArray()[0].value);
+
+  })
 });
