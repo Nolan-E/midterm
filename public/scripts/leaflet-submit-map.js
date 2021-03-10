@@ -11,12 +11,12 @@ function onMapClickAddMarker(e) {
     Arr.push([lat, lng])
     // console.log('Arr is now', Arr);
     markerGroup.addLayer(L.marker([lat, lng]).addTo(mymap)
-     //.bindTooltip("some text"))
      .bindTooltip('click me to edit')
-     .bindPopup('initial popup with edits')
-     .on('click', function() {
-      this.openPopup();
-     }));
+     .bindPopup(editPopup)
+    //  .on('click', function() {
+    //   this.openPopup();
+    //  })
+    );
     const appendField = `
       <div class="card border-dark mt-3 mb-1">
         <div>
