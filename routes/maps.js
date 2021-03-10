@@ -112,13 +112,9 @@ router.get("/:id", (req,res) => {
   const { id } = req.params;
   getMapOfPinsByID(id)
     .then(data => {
-      console.log('Retrieving...', data)
-      res.json(data)
-
+      console.log('Retrieving...', data);
+      res.json(data);
     })
-
-
-  // res.json(dataPoints);
 });
 
 
@@ -133,7 +129,6 @@ router.post('/', (req, res) => {
     .then(res => {
       console.log(submition.pins);
       manyPins(res.id, submition.pins);
-
     })
     .finally(res.status(200).send('ok'));
 
@@ -151,6 +146,11 @@ router.post('/addtofavorites', (req, res) => {
 
 router.post('/edit', (req, res) => {
   res.status(200).send('going to edit something');
+});
+
+router.post('/:id/delete', (req, res) => {
+  console.log('Inside map routes post maps delete');
+  res.send('maps deletion in progress');
 });
 
 module.exports = router;

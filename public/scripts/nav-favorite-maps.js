@@ -18,6 +18,14 @@ const showFavoriteMaps = () => {
               <input type="hidden" name="map_id" value="${map.map_id}">
               <button type="submit">See Reviews</button>
             </form>
+            <form class="form-edit-map">
+              <input type="hidden" name="map_id" value="${map.map_id}">
+              <button type="submit">Edit Map</button>
+            </form>
+            <form class="form-delete-map">
+              <input type="hidden" name="map_id" value="${map.map_id}">
+              <button type="submit">Delete Map</button>
+            </form>
 
             <small id="map-author-rating">
               <p class="card-text">Rating: ${map.rating}/5</p>
@@ -107,6 +115,20 @@ $(document).ready(function() {
         console.log('pinDetails are', pinDetails);
         showReviews(pinDetails)
       })
-
   })
+
+  $(document).on("submit", ".form-edit-map", function(event) {
+    alert('This still needs to be implemented. Do this after Eric figures out how to manipulate on create map.');
+  });
+
+  $(document).on("submit", ".form-delete-map", function(event) {
+    event.preventDefault();
+    const mapId = Number($(this).serializeArray()[0].value);
+    $.post(`http://localhost:8080/api/maps/${mapId}/delete`)
+      .then((data) => {
+        console.log('Received data is:', data)
+      })
+  })
+
+
 });
