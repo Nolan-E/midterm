@@ -10,6 +10,7 @@ function onMapClickAddMarker(e) {
     Arr.push([lat, lng])
     // console.log('Arr is now', Arr);
     L.marker([lat, lng]).addTo(mymap)
+     .bindTooltip("some text");
     const appendField = `
       <div class="card border-dark mt-3 mb-1">
         <div>
