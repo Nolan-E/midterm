@@ -41,8 +41,17 @@ $(document).ready(function() {
 
   $(document).on("submit", ".form-map-name", function(event) {
     event.preventDefault();
-    const data = $(this).serialize();
-    console.log(data);
+
+    // retrieve mapid from the specific button that was clicked
+    const mapId = Number($(this).serializeArray()[0].value);
+    console.log(mapId);
+
+    $.get(`http://localhost:8080/api/maps/${mapId}`)
+      .then(data => {
+        console.log(data)
+      })
+
+
   })
 
 });
