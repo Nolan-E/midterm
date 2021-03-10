@@ -14,6 +14,7 @@ const showExploreMaps = () => {
                 <p class="card-text">Rating: ${map.rating}/5</p>
                 <p class="card-text">${map.map_created}</p>
               </small>
+              <button class="add-to-favorites">Add to Favorites</button>
             </div>
           </div>
           `;
@@ -24,4 +25,14 @@ const showExploreMaps = () => {
 
 $(document).ready(function() {
   $("#nav-explore-maps").on("click", showExploreMaps)
+
+  $(document).on("click", ".add-to-favorites", function() {
+    alert("Added to favorites!");
+    $.post("http://localhost:8080/api/maps/addtofavorites")
+      .then((data) => {
+        console.log('inside then');
+        console.log(data)
+      })
+
+  })
 })
