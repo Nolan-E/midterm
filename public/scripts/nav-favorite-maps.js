@@ -13,7 +13,6 @@ const showFavoriteMaps = () => {
             <form class="form-map-name">
               <input type="hidden" name="map_id" value="${map.map_id}">
               <button class="button-map-name" type="submit">${map.map_name}</button>
-              <h5 class="card-title"><a href="" type="submit">${map.map_name}</a></h5>
             </form>
 
             <small id="map-author-rating">
