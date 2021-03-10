@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
   });
 });
 const { getUserWithEmail } = require('../db//queries/users-queries');
+const { isLoggedIn } = require('../public/scripts/middleware');
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -31,7 +32,7 @@ router.post("/login", (req, res) => {
     .catch(() => res.status(401).send('Login error.'));
 })
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isLoggedIn, (req, res) => {
   req.session = null;
   res.send("Successfully logged out.")
 })
