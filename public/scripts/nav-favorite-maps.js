@@ -1,6 +1,6 @@
 const showFavoriteMaps = () => {
   $("#map-info-area").empty()
-  $.get("http://localhost:8080/api/maps/favorites")
+  $.get("api/maps/favorites")
     .then(maps => {
       console.log(maps)
       $("#map-info-area").append("<h1>Favorite Maps</h1>");

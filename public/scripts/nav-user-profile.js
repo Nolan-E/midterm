@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $("#nav-user-profile").on("click", function() {
     $("#map-info-area").empty()
-    $.get("http://localhost:8080/api/users", function(e) { // url link
+    $.get("api/users", function(e) { // url link
     console.log(e)
       const userFirst = e['checking'];
       const userLast = e['ueser'];
