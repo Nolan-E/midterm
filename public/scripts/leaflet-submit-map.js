@@ -2,21 +2,22 @@
 
 const Arr = [];
 let i = 0;
-let markerGroup = L.layerGroup([]);
+let markerGroup = L.featureGroup([]);
 markerGroup.addTo(mymap);
+
 function onMapClickAddMarker(e) {
     const lat = e.latlng.lat;
     const lng = e.latlng.lng;
 
     Arr.push([lat, lng])
     // console.log('Arr is now', Arr);
-    markerGroup.addLayer(L.marker([lat, lng]).addTo(mymap)
-     .bindTooltip('click me to edit')
-     .bindPopup(editPopup)
-    //  .on('click', function() {
-    //   this.openPopup();
-    //  })
-    );
+    markerGroup.addLayer(marker = L.marker([lat, lng]).addTo(mymap)
+    //  .bindTooltip('click me to edit')
+    .bindPopup(editPopup)
+    //  .on('popupopen', function() {
+      //   this.openPopup();
+      //  })
+      );
     const appendField = `
       <div class="card border-dark mt-3 mb-1">
         <div>
