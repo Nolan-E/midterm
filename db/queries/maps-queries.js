@@ -3,7 +3,7 @@ const db = require('../../server');
 // Gets a list of all available maps
 const getAllMapsAnon = () => {
   return db.query(`
-    SELECT maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
     users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
