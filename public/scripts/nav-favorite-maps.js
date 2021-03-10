@@ -8,7 +8,7 @@ const showFavoriteMaps = () => {
         const createMapCard = `
         <div class="card border-primary">
 
-          <div class="card-header">${map.created_by}</div>
+          <div class="card-header">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
             <form class="form-map-name">
               <input type="hidden" name="map_id" value="${map.map_id}">
