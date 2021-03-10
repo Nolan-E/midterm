@@ -1,18 +1,16 @@
-$(document).ready(function() {
-
-  $("#nav-login-form").on("click", function() {
-    $("#map-info-area").empty();
+const showLoginForm = () => {
+  $("#map-info-area").empty();
     const loginForm = `
     <main>
       <h3>Log In</h3>
       <form id="form-login" action="">
         <div class="form-group mb-2 form-inline">
           <label for="email"></label>
-          <input class="form-control" type="email" name="email" placeholder="Email" value="alice@wonderland.com">
+          <input class="form-control" type="email" name="email" placeholder="Email" value="kira@knight.com">
         </div>
         <div class="form-group mb-2 form-inline">
           <label for="password"></label>
-          <input class="form-control" type="password" name="password" placeholder="Password" value="plainfornow">
+          <input class="form-control" type="password" name="password" placeholder="Password" value="password">
         </div>
         <div class="form-group mb-2">
           <button type="submit" class="btn btn-primary">Log In</button>
@@ -21,7 +19,11 @@ $(document).ready(function() {
     </main>
     `;
     $("#map-info-area").append(loginForm);
-  })
+}
+
+$(document).ready(function() {
+
+  $("#nav-login-form").on("click", showLoginForm);
 
   $(document).on("submit", "#form-login", function(event) {
     event.preventDefault();
