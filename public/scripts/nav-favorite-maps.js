@@ -34,6 +34,8 @@ const showFavoriteMaps = () => {
 const showReviews = (reviews) => {
   console.log(reviews);
   $("#map-info-area").empty()
+  $("#map-info-area").append("<h1>User Reviews</h1>");
+
 
   for (const review of reviews) {
     const createReviewCard = `
