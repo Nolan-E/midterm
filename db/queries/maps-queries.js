@@ -3,10 +3,28 @@ const db = require('../../server');
 // Gets a list of all available maps
 const getAllMapsAnon = () => {
   return db.query(`
-    SELECT maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by
+    SELECT maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating
     FROM maps
     JOIN users ON maps.user_id = users.id
-    ORDER BY map_created DESC;`
+    JOIN fav_maps ON fav_maps.map_id = maps.id
+    GROUP BY maps.id, users.name
+    ORDER BY maps.date_created DESC;`
+  )
+    .then(response => response.rows)
+    .catch(err => err);
+};
+// Gets a list of top rated maps
+const getTopRated = () => {
+  return db.query(`
+    SELECT maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating
+    FROM maps
+    JOIN users ON maps.user_id = users.id
+    JOIN fav_maps ON fav_maps.map_id = maps.id
+    GROUP BY maps.id, users.name
+    ORDER BY rating DESC
+    LIMIT 5;`
   )
     .then(response => response.rows)
     .catch(err => err);
@@ -61,6 +79,7 @@ const createNewMap = (userID, mapName) => {
 //EXPORT FUNCTIONS
 module.exports = {
   getAllMapsAnon,
+  getTopRated,
   getAllMapsByUser,
   getMapsByID,
   getMapOfPinsByID,
