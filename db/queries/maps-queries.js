@@ -9,7 +9,7 @@ const getAllMapsAnon = () => {
     ORDER BY map_created DESC;`
   )
     .then(response => response.rows)
-    .catch(err => null);
+    .catch(err => err);
 };
 // Gets a list of all maps by creator
 const getAllMapsByUser = (userName) => {
@@ -21,7 +21,7 @@ const getAllMapsByUser = (userName) => {
     ORDER BY map_created DESC;`, [userName]
   )
     .then(response => response.rows)
-    .catch(err => null);
+    .catch(err => err);
 };
 // Gets a map by map_id
 const getMapsByID = (mapID) => {
@@ -32,7 +32,7 @@ const getMapsByID = (mapID) => {
     WHERE maps.id = $1;`, [mapID]
   )
     .then(response => response.rows)
-    .catch(err => null);
+    .catch(err => err);
 };
 // Gets a specific map of pins by map_id
 const getMapOfPinsByID = (mapID) => {
@@ -46,7 +46,7 @@ const getMapOfPinsByID = (mapID) => {
     ORDER BY pin_id;`, [mapID]
   )
     .then(response => response.rows)
-    .catch(err => null);
+    .catch(err => err);
 };
 // Save new map to database
 const createNewMap = (userID, mapName) => {
@@ -55,7 +55,7 @@ const createNewMap = (userID, mapName) => {
   VALUES ($1, $2, current_timestamp) RETURNING maps.id;
   `, [mapName, userID])
     .then(response => response.rows[0])
-    .catch(err => null);
+    .catch(err => err);
 };
 
 //EXPORT FUNCTIONS

@@ -12,7 +12,7 @@ const getAllPinReviews = (userID) => {
     ORDER BY date_reviewed DESC;`, [userID]
   )
   .then(response => response.rows)
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Add a new review to pin reviews
@@ -22,7 +22,7 @@ const createNewPinReview = (userID, pinID, pinRevObj) => {
     VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [pinID, userID, pinRevObj.stars, pinRevObj.message]
   )
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 //EXPORT FUNCTIONS

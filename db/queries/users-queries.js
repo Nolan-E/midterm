@@ -7,7 +7,7 @@ const getUserWithEmail = (email) => {
   WHERE email = $1
   `, [email])
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Gets all user data with user ID
@@ -17,7 +17,7 @@ const getUserWithID = (userID) => {
   WHERE id = $1
   `, [userID])
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Create new user
@@ -27,7 +27,7 @@ const addUser = (user) => {
   VALUES ($1, $2, $3) RETURNING *;
   `, [user.name, user.email, user.password])
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 //EXPORT FUNCTIONS

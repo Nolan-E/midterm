@@ -9,7 +9,7 @@ const createPin = (mapID, pin) => {
     VALUES ($1, $2, $3, $4, $5);`, [mapID, lat, lng, pin.pinName, pin.pinDesc]
   )
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Loop through geoJSON of many pins
