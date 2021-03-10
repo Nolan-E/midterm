@@ -10,7 +10,7 @@ const getAllFavMaps = (userID) => {
   JOIN pins ON pins.map_id = maps.id
   JOIN users ON maps.user_id = users.id
   WHERE fav_maps.user_id = $1
-  GROUP BY maps.id, users.name, pins.image_url, fav_maps.rating, fav_maps.review, fav_maps.fav_date
+  GROUP BY maps.id, users.name, pins.image_url, fav_maps.map_id, fav_maps.rating, fav_maps.review, fav_maps.fav_date
   ORDER BY fav_date DESC;`, [userID]
   )
   .then(response => response.rows)
