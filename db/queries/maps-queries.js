@@ -32,15 +32,17 @@ const getTopRated = () => {
     .catch(err => err);
 };
 // Gets a list of all maps by creator
-const getAllMapsByUser = (userName) => {
+const getAllMapsByUser = (userID) => {
   return db.query(`
-    SELECT maps.id AS map_id, maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by, MIN(pins.image_url) AS img_url
+    SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
+    JOIN fav_maps ON fav_maps.map_id = maps.id
     JOIN pins ON pins.map_id = maps.id
-    WHERE users.name = $1
+    WHERE users.id = $1
     GROUP BY maps.id, users.name, pins.image_url
-    ORDER BY map_created DESC;`, [userName]
+    ORDER BY map_created DESC;`, [userID]
   )
     .then(response => response.rows)
     .catch(err => err);
@@ -48,9 +50,11 @@ const getAllMapsByUser = (userName) => {
   // Gets a map by map_id
   const getMapsByID = (mapID) => {
     return db.query(`
-    SELECT maps.id AS map_id, maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by, MIN(pins.image_url) AS img_url
+    SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
+    JOIN fav_maps ON fav_maps.map_id = maps.id
     JOIN pins ON pins.map_id = maps.id
     WHERE maps.id = $1
     GROUP BY maps.id, users.name, pins.image_url;`, [mapID]
@@ -61,10 +65,12 @@ const getAllMapsByUser = (userName) => {
 // Gets a specific map of pins by map_id
 const getMapOfPinsByID = (mapID) => {
   return db.query(`
-    SELECT maps.id AS map_id, maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by,
-    pins.id AS pin_id, pins.lat AS pin_lat, pins.lng AS pin_lng, pins.title AS pin_title, pins.description AS pin_description, MIN(pins.image_url) AS img_url
+    SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating, pins.id AS pin_id, pins.lat AS pin_lat,
+    pins.lng AS pin_lng, pins.title AS pin_title, pins.description AS pin_description, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
+    JOIN fav_maps ON fav_maps.map_id = maps.id
     JOIN pins ON maps.id = pins.map_id
     WHERE maps.id = $1
     GROUP BY maps.id, users.name, pins.id, pins.image_url

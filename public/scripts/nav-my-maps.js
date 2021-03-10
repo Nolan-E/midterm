@@ -11,7 +11,7 @@ const showMyMaps = () => {
           <div class="card-body text-primary">
             <h5 class="card-title">${map.map_name}</h5>
             <small id="map-author-rating">
-              <p class="card-text">NEED RATING%@#$%@#$%</p>
+              <p class="card-text">Rating: ${map.rating}/5</p>
               <p class="card-text">${map.map_created}</p>
             </small>
           </div>

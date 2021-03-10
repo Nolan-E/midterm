@@ -89,7 +89,7 @@ router.get("/", (req, res) => {
 });
 
 router.get('/mymaps', (req, res) => {
-  getAllMapsByUser(req.session.user_name)
+  getAllMapsByUser(req.session.user_id)
     .then(data => {
       res.send(data);
     })
