@@ -8,12 +8,15 @@ const showFavoriteMaps = () => {
         const createMapCard = `
         <div class="card border-primary">
 
-          <div class="card-header">${map.created_by}</div>
+          <div class="card-header">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
             <form class="form-map-name">
               <input type="hidden" name="map_id" value="${map.map_id}">
-              <button class="button-map-name" type="submit">${map.map_name}</button>
-              <h5 class="card-title"><a href="" type="submit">${map.map_name}</a></h5>
+              <button type="submit">${map.map_name}</button>
+            </form>
+            <form class="form-see-reviews">
+              <input type="hidden" name="map_id" value="${map.map_id}">
+              <button type="submit">See Reviews</button>
             </form>
 
             <small id="map-author-rating">
@@ -28,6 +31,27 @@ const showFavoriteMaps = () => {
     })
 };
 
+const showReviews = (reviews) => {
+  console.log(reviews);
+  $("#map-info-area").empty()
+  $("#map-info-area").append("<h1>User Reviews</h1>");
+
+
+  for (const review of reviews) {
+    const createReviewCard = `
+      <div class="card border-dark mb-1">
+        <div class="card-header bg-transparent border-success">${review.pin_title}</div>
+        <div class="card-body text-dark">
+          <p class="card-text">Rating: ${review.stars}/5</p>
+          <p class="card-text">${review.pin_review_msg}</p>
+        </div>
+        <div class="card-footer bg-transparent border-success text-muted">Review by: ${review.user_name} (${review.date_reviewed})</div>
+      </div>
+    `;
+
+    $("#map-info-area").append(createReviewCard);
+  }
+};
 
 const showMapDetails = (details) => {
   $("#map-info-area").empty();
@@ -71,8 +95,18 @@ $(document).ready(function() {
         console.log('mapdetails are', mapDetails[0]);
         showMapDetails(mapDetails[0]);
       })
-
-
   })
 
+
+  $(document).on("submit", ".form-see-reviews", function(event) {
+    event.preventDefault();
+    const pinId = Number($(this).serializeArray()[0].value);
+    console.log(pinId);
+    $.get(`http://localhost:8080/api/parks/${pinId}`)
+      .then(pinDetails => {
+        console.log('pinDetails are', pinDetails);
+        showReviews(pinDetails)
+      })
+
+  })
 });

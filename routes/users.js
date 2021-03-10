@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+
 const express = require('express');
 const router  = express.Router();
 router.get("/", (req, res) => {
@@ -14,7 +15,18 @@ router.get("/", (req, res) => {
   });
 });
 const { getUserWithEmail } = require('../db//queries/users-queries');
+const { getUserWithID } = require('../db/queries/users-queries');
 const { isLoggedIn } = require('../public/scripts/middleware');
+
+
+router.get("/about", (req, res) => {
+  const userId = req.session.user_id;
+  getUserWithID(userId)
+    .then(data => {
+      res.send(data);
+    })
+
+});
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;

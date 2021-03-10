@@ -139,13 +139,13 @@ router.post('/', (req, res) => {
 });
 
 router.post('/addtofavorites', (req, res) => {
-  console.log('body', req.body);
-  console.log('params', req.params)
-  const { id } = req.session;
+  const mapId = req.body.mapId;
+  const userId = req.session.user_id;
 
-  // addToMyFav(userID, mapID)
-  console.log('ok');
-  res.send('ok 2')
+  addToMyFav(userId, mapId)
+    .then(favMapsEntry => {
+      res.send(favMapsEntry);
+    })
 });
 
 router.post('/edit', (req, res) => {
