@@ -4,10 +4,17 @@ const db = require('../../server');
 const createPin = (mapID, pin) => {
   const lat = Number(pin.pinLat);
   const lng = Number(pin.pinLng);
-  return db.query(`
-    INSERT INTO pins (map_id, lat, lng, title, description)
-    VALUES ($1, $2, $3, $4, $5);`, [mapID, lat, lng, pin.pinName, pin.pinDesc]
-  )
+  const queryParams = [mapID, lat, lng, pin.pinName, pin.pinDesc];
+  let queryString =
+   `INSERT INTO pins (map_id, lat, lng, title, description, image_url)
+    VALUES ($1, $2, $3, $4, $5`;
+    if (pin.imgURL === undefined || !pin.imgURL.trim()) {
+      queryString += `, default);`;
+    } else {
+      queryString += `, $6);`;
+      queryParams.push(pin.imgURL.trim());
+    }
+  return db.query(queryString, queryParams)
   .then(response => response.rows[0])
   .catch(err => err);
 };
