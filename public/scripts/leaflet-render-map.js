@@ -10,7 +10,7 @@
 // ];
 
 // const home = [51.1391, -114.2002];
-const mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
+let mymap = L.map('mapid').setView([51.049999, -114.066666], 11);
 L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KSgZl5R174SBURmzIIyg', {
   attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(mymap);
