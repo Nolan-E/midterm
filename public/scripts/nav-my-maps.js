@@ -2,7 +2,7 @@ const showMyMaps = () => {
   $("#map-info-area").empty()
   $.get("api/maps/mymaps")
     .then(maps => {
-      console.log(maps)
+      console.log('aksdjhflk', maps)
       $("#map-info-area").append("<h1>My Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
