@@ -53,6 +53,7 @@ $(document).ready(function() {
         $("#nav-register").removeClass("d-none");
         $("#nav-login-form").removeClass("d-none");
         $("#nav-logout").addClass("d-none");
+        showExploreMaps();
       })
   })
 
