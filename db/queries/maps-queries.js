@@ -14,7 +14,7 @@ const getAllMapsAnon = () => {
 // Gets a list of all maps by creator
 const getAllMapsByUser = (userName) => {
   return db.query(`
-    SELECT maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by
+    SELECT maps.id AS map_id, maps.name AS map_name, maps.date_created AS map_created, users.name AS created_by
     FROM maps
     JOIN users ON maps.user_id = users.id
     WHERE users.name = $1
