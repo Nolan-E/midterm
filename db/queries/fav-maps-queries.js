@@ -12,7 +12,7 @@ const getAllFavMaps = (userID) => {
     ORDER BY fav_date DESC;`, [userID]
   )
   .then(response => response.rows)
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Add a map to my fav maps
@@ -22,7 +22,7 @@ const addToMyFav = (userID, mapID, rating, review) => {
     VALUES ($1, $2, $3, $4, current_timestamp) RETURNING *;`, [userID, mapID, rating, review]
   )
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 //EXPORT FUNCTIONS

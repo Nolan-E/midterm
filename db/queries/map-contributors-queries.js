@@ -7,7 +7,7 @@ const editMap = (mapID, userID, type) => {
     VALUES ($1, $2, current_timestamp, $3) RETURNING *;`, [mapID, userID, type]
   )
   .then(response => response.rows[0])
-  .catch(err => null);
+  .catch(err => err);
 };
 
 // Gets a list of all maps by creator
@@ -22,7 +22,7 @@ const getRecentEdits = (mapID) => {
     LIMIT 10;`, [mapID]
   )
   .then(response => response.rows)
-  .catch(err => null);
+  .catch(err => err);
 };
 
 //EXPORT FUNCTIONS
