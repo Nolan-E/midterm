@@ -33,7 +33,7 @@ $(document).ready(function() {
     });
     const userLoginObj = {email: formDataAsArray[0], password: formDataAsArray[1]};
 
-    $.post("http://localhost:8080/api/users/login", userLoginObj)
+    $.post("api/users/login", userLoginObj)
       .then((usersName) => {
         showExploreMaps();
         $("#nav-user-profile").text(usersName).removeClass("d-none");
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
   $(document).on("click", "#nav-logout", function(event) {
     event.preventDefault();
-    $.get("http://localhost:8080/api/users/logout")
+    $.get("api/users/logout")
       .then((data) => {
         alert(data);
         $("#nav-user-profile").addClass("d-none");

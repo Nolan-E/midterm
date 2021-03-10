@@ -1,6 +1,6 @@
 const showMyMaps = () => {
   $("#map-info-area").empty()
-  $.get("http://localhost:8080/api/maps/mymaps")
+  $.get("api/maps/mymaps")
     .then(maps => {
       console.log(maps)
       $("#map-info-area").append("<h1>My Maps</h1>");
