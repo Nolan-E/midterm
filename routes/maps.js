@@ -7,6 +7,10 @@ const {
   getMapOfPinsByID,
   createNewMap
 } = require('../db/queries/maps-queries');
+const {
+  getAllFavMaps,
+  addToMyFav
+} = require('../db/queries/fav-maps-queries');
 const {createPin,
   manyPins
 } = require('../db/queries/pins-queries.js');
@@ -79,10 +83,20 @@ router.get("/", (req, res) => {
   res.json(maps);
 });
 
+router.get('/mymaps', (req, res) => {
+  getAllMapsByUser(req.session.user_name)
+    .then(data => {
+      res.send(data);
+    })
+});
+
 //will get all maps for sidedbar that are users favorited maps
 router.get('/favorites', (req, res) => {
-  res.json({has: 'object that is all maps that have favorite'});
-
+  getAllFavMaps(req.session.user_id)
+  .then(data => {
+    res.send(data);
+  })
+  // res.json({has: 'object that is all maps that have favorite'});
 });
 
 //will get map by name
