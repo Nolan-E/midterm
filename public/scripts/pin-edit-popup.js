@@ -2,7 +2,7 @@
   let delBtn = document.createElement('button');
   delBtn.innerText = 'Remove Pin';
   delBtn.onclick = function() {
-    markerGroup.remove();
+  markerGroup.removeLayer(marker);
   }
 
 
