@@ -8,5 +8,5 @@ CREATE TABLE pins (
   description TEXT NOT NULL,
   lat FLOAT NOT NULL,
   lng FLOAT NOT NULL,
-  image_url VARCHAR DEFAULT 'https://via.placeholder.com/250x100.png?text=No+Image+Available'
+  image_url VARCHAR(255) NOT NULL DEFAULT 'https://via.placeholder.com/250x100.png?text=No+Image+Available'
 );
