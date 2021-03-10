@@ -14,7 +14,11 @@ const showExploreMaps = () => {
                 <p class="card-text">Rating: ${map.rating}/5</p>
                 <p class="card-text">${map.map_created}</p>
               </small>
-              <button class="add-to-favorites">Add to Favorites</button>
+              <form class="add-to-favorites">
+                <input type="hidden" name="map_id" value="${map.map_id}">
+                <button type="submit">Add to Favorites</button>
+              </form>
+
             </div>
           </div>
           `;
@@ -26,12 +30,13 @@ const showExploreMaps = () => {
 $(document).ready(function() {
   $("#nav-explore-maps").on("click", showExploreMaps)
 
-  $(document).on("click", ".add-to-favorites", function() {
-    alert("Added to favorites!");
-    $.post("http://localhost:8080/api/maps/addtofavorites")
+  $(document).on("submit", ".add-to-favorites", function(event) {
+    event.preventDefault();
+    console.log("Added to favorites!");
+    const mapId = Number($(this).serializeArray()[0].value);
+    $.post("http://localhost:8080/api/maps/addtofavorites", {mapId})
       .then((data) => {
-        console.log('inside then');
-        console.log(data)
+        console.log('The following entry has been added into the fav_maps table: ', data)
       })
 
   })
