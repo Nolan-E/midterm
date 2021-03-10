@@ -1,36 +1,25 @@
 const showExploreMaps = () => {
   $("#map-info-area").empty()
-    $.get("http://localhost:8080/api/maps", function(e) {
-      const mapCardName = e['checking'];
-      const mapCardAuthor = e['lat'];
-      const mapCardRating = e['long'];
-      const mapCards = `
-      <h1>Explore Maps</h1>
-
-      <div class="card border-primary mb-2">
-        <div class="card-header">Suzy Kerr</div>
-        <div class="card-body text-primary">
-          <h5 class="card-title">Suzy's Top 10 Dog Parks</h5>
-          <small id="map-author-rating">
-            <p class="card-text">Suzy Kerr</p>
-            <p class="card-text">4.5/5</p>
-          </small>
-        </div>
-      </div>
-
-      <div class="card border-primary mb-2">
-        <div class="card-header">${mapCardName}</div>
-        <div class="card-body text-primary">
-          <h5 class="card-title">${mapCardAuthor}</h5>
-          <small id="map-author-rating">
-            <p class="card-text">${mapCardRating}</p>
-            <p class="card-text">${mapCardRating}</p>
-          </small>
-        </div>
-      </div>
-      `;
-      $("#map-info-area").append(mapCards)
-    })
+    $.get("http://localhost:8080/api/maps/")
+      .then(maps => {
+        console.log(maps)
+        $("#map-info-area").append("<h1>Explore Maps</h1>");
+        for (const map of maps) {
+          const createMapCard = `
+          <div class="card border-primary mb-2">
+            <div class="card-header">By ${map.created_by}</div>
+            <div class="card-body text-primary">
+              <h5 class="card-title">${map.map_name}</h5>
+              <small id="map-author-rating">
+                <p class="card-text">Rating: ${map.rating}/5</p>
+                <p class="card-text">${map.map_created}</p>
+              </small>
+            </div>
+          </div>
+          `;
+          $("#map-info-area").append(createMapCard);
+        }
+      })
 };
 
 $(document).ready(function() {

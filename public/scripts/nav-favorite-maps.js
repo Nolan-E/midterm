@@ -3,6 +3,7 @@ const showFavoriteMaps = () => {
   $.get("http://localhost:8080/api/maps/favorites")
     .then(maps => {
       console.log(maps)
+      $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
         <div class="card border-primary mb-2">

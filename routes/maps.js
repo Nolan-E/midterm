@@ -80,7 +80,12 @@ const maps = {
 
 //will get all maps for sidebar display on initial load
 router.get("/", (req, res) => {
-  res.json(maps);
+  getAllMapsAnon()
+    .then(data => {
+      res.send(data);
+    })
+
+  // res.json(maps);
 });
 
 router.get('/mymaps', (req, res) => {

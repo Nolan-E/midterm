@@ -3,6 +3,7 @@ const showMyMaps = () => {
   $.get("http://localhost:8080/api/maps/mymaps")
     .then(maps => {
       console.log(maps)
+      $("#map-info-area").append("<h1>My Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
         <div class="card border-primary mb-2">
@@ -24,5 +25,4 @@ const showMyMaps = () => {
 
 $(document).ready(function() {
   $("#nav-my-maps").on("click", showMyMaps);
-
 });
