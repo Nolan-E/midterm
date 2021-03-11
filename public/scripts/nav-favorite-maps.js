@@ -2,7 +2,7 @@ const showFavoriteMaps = () => {
   $("#map-info-area").empty()
   $.get("api/maps/favorites")
     .then(maps => {
-      console.log('Retrieved data is', maps)
+      // console.log('Retrieved data is', maps)
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
@@ -94,6 +94,10 @@ const showMapDetails = (details) => {
               <p>pin.map_id ${pin.map_id}</p>
               <p>pin.description ${pin.description}</p>
             </div>
+            <form class="form-delete-pin">
+              <input type="hidden" name="pinId" value="${pin.id}">
+              <button type="submit">Delete Pin</button>
+            </form>
           </div>
         `;
         $("#map-info-area").append(pinInformation);
@@ -109,7 +113,7 @@ $(document).ready(function() {
     const mapId = Number($(this).serializeArray()[0].value);
     $.get(`http://localhost:8080/api/maps/${mapId}`)
       .then(mapDetails => {
-        console.log('mapdetails are', mapDetails[0]);
+        console.log('This map has the following pins are:', mapDetails[0]);
         showMapDetails(mapDetails[0]);
       })
       .catch(error => console.log(error));
@@ -131,13 +135,26 @@ $(document).ready(function() {
     alert('This still needs to be implemented. Do this after Eric figures out how to manipulate on create map.');
   });
 
-  $(document).on("submit", ".form-delete-map", function(event) {
+  // $(document).on("submit", ".form-delete-map", function(event) {
+  //   event.preventDefault();
+  //   const mapId = Number($(this).serializeArray()[0].value);
+  //   $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
+  //     .then((data) => {
+  //       console.log('Delete Map > Then > Received data is:', data)
+  //       showFavoriteMaps();
+  //     })
+  //     .catch(error => console.log(error));
+  // })
+
+  $(document).on("submit", ".form-delete-pin", function(event) {
+    event.stopPropagation();
     event.preventDefault();
-    const mapId = Number($(this).serializeArray()[0].value);
-    $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
-      .then((data) => {
-        console.log('Delete Map > Then > Received data is:', data)
-        showFavoriteMaps();
+    console.log("delete pin button clicked");
+    const pinId = Number($(this).serializeArray()[0].value);
+    console.log('this pins id is', pinId);
+    $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
+      .then(response => {
+        console.log('after post, the response received is', response);
       })
       .catch(error => console.log(error));
   })
