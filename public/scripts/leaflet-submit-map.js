@@ -5,21 +5,26 @@ let i = 0;
 let markerGroup = L.featureGroup([]);
 markerGroup.addTo(mymap);
 
-function onMapClickAddMarker(e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
+let editPopup = L.popup({
+  editable: true,
+  removable:true,
+  nametag: `newPin${1}`
 
-    Arr.push([lat, lng])
-    // console.log('Arr is now', Arr);
-    markerGroup.addLayer(marker = L.marker([lat, lng]).addTo(mymap)
-    //  .bindTooltip('click me to edit')
+}).setContent('delBtn', 'place holder for custom html elment');
+
+
+const onMapClickAddMarker = function(e) {
+  const lat = e.latlng.lat;
+  const lng = e.latlng.lng;
+
+  Arr.push([lat, lng]);
+  // console.log('Arr is now', Arr);
+  markerGroup.addLayer(marker = L.marker([lat, lng]).addTo(mymap)
     .bindPopup(editPopup)
-    //  .on('popupopen', function() {
-      //   this.openPopup();
-      //  })
-      );
-    const appendField = `
-      <div class="card border-dark mt-3 mb-1 create-card">
+
+  );
+  const appendField = `
+      <div class="card border-dark mt-3 mb-1 create-card" id="pin-${i}">
         <div>
           <label for="pin-title">Name:</label>
           <input type="text" name="pins[${i}][pin-title]" required>
@@ -39,11 +44,18 @@ function onMapClickAddMarker(e) {
       </div>
     `;
 
-    $("#form-container").append(appendField)
-    $("#form-container").append("<br>")
-    i ++;
-    // console.log('inside', i);
+  $("#form-container").append(appendField);
+  $("#form-container").append("<br>");
+  i ++;
+  $(document).on("removeMarker", function() {
+    console.log('i heard the remove event');
+  });
+  // console.log('inside', i);
 
-}
+};
 
 mymap.on('click', onMapClickAddMarker);
+
+document.addEventListener("removeMarker", (e) => {
+  console.log(e);
+});
