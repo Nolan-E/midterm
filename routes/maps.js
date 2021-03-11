@@ -14,6 +14,7 @@ const {
 const {createPin,
   manyPins
 } = require('../db/queries/pins-queries.js');
+const {deleteMyFav} = require('../db/queries/fav-maps-queries');
 const {isLoggedIn} = require('../public/scripts/middleware');
 
 //dumy data
@@ -145,8 +146,16 @@ router.post('/edit', (req, res) => {
 });
 
 router.post('/:id/delete', (req, res) => {
-  console.log('Inside map routes post maps delete');
-  res.send('maps deletion in progress');
+  const { mapId } = req.body;
+  const userId = req.session.user_id;
+  deleteMyFav(userId, mapId)
+    .then(() => {
+      console.log(`mapId of ${mapId} and userId of ${userId} has been deleted.`);
+      return res.send('Map removed from favorites.');
+    })
+    .catch(error => {
+      return res.status(404).send(`Could not delete this map. Error message: ${error}`);
+    })
 });
 
 module.exports = router;

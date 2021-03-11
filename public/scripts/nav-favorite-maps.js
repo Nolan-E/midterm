@@ -128,11 +128,11 @@ $(document).ready(function() {
   $(document).on("submit", ".form-delete-map", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post(`http://localhost:8080/api/maps/${mapId}/delete`)
+    $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
       .then((data) => {
-        console.log('Received data is:', data)
+        console.log('Delete Map > Then > Received data is:', data)
+        showFavoriteMaps();
       })
+      .catch(error => console.log(error));
   })
-
-
 });
