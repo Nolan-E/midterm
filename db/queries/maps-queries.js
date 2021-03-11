@@ -89,6 +89,28 @@ const createNewMap = (userID, mapName) => {
     .then(response => response.rows[0])
     .catch(err => err);
 };
+// Delete map
+const deleteMap = (userID, mapID) => {
+  return db.query(`
+    UPDATE maps
+    SET active = false
+    FROM users
+    WHERE users.id = user_id AND user_id = $1 AND maps.id = $2 RETURNING maps.*;`, [userID, mapID]
+  )
+    .then(response => response.rows[0])
+    .catch(err => err)
+};
+// Edit map
+const editMap = (userID, mapID, mapName) => {
+  return db.query(`
+    UPDATE maps
+    SET maps.name = $3
+    FROM users
+    WHERE users.id = user_id AND user_id = $1 AND maps.id = $2 RETURNING maps.*;`, [userID, mapID, mapName]
+  )
+    .then(response => response.rows[0])
+    .catch(err => err)
+};
 
 //EXPORT FUNCTIONS
 module.exports = {
@@ -97,5 +119,6 @@ module.exports = {
   getAllMapsByUser,
   getMapsByID,
   getMapOfPinsByID,
-  createNewMap
+  createNewMap,
+  deleteMap
 };
