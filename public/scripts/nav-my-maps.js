@@ -10,7 +10,7 @@ const showMyMaps = () => {
           if (map.rating) {
             ratingStr = `Rating: ${map.rating}`;
           } else {
-            ratingStr = `No rating`
+            ratingStr = `No rating`;
           }
           const createMapCard = `
           <div class="card border-primary mb-2 map-card" id=${map.map_id}>
