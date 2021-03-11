@@ -4,14 +4,14 @@ const db = require('../../server');
 const getAllMapsAnon = () => {
   return db.query(`
     SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
-    users.name AS created_by, TRUNC(AVG(fav_maps.rating)) AS rating, MIN(pins.image_url) AS img_url
+    users.name AS created_by, TRUNC(AVG(fav_maps.rating), 1) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
     JOIN fav_maps ON fav_maps.map_id = maps.id
     JOIN pins ON pins.map_id = maps.id
-    GROUP BY maps.id, users.name, pins.image_url
-    ORDER BY maps.date_created DESC;`
-  )
+    GROUP BY maps.id, users.name
+    ORDER BY maps.date_created DESC;
+    `)
     .then(response => response.rows)
     .catch(err => err);
 };
