@@ -37,12 +37,14 @@ $(document).ready(function() {
 
   $(document).on("submit", ".add-to-favorites", function(event) {
     event.preventDefault();
-    console.log("Added to favorites!");
     const mapId = Number($(this).serializeArray()[0].value);
     $.post("api/maps/addtofavorites", {mapId})
       .then((data) => {
+        console.log("Added to favorites!");
         console.log('The following entry has been added into the fav_maps table: ', data)
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        alert(error.responseText);
+      });
   })
 })
