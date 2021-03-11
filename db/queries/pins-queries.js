@@ -6,8 +6,8 @@ const createPin = (mapID, pin) => {
   const lng = Number(pin.pinLng);
   const queryParams = [mapID, lat, lng, pin.pinName, pin.pinDesc];
   let queryString =
-   `INSERT INTO pins (map_id, lat, lng, title, description, image_url)
-    VALUES ($1, $2, $3, $4, $5`;
+   `INSERT INTO pins (map_id, lat, lng, title, description, active, image_url)
+    VALUES ($1, $2, $3, $4, $5, default`;
     if (pin.imgURL === undefined || !pin.imgURL.trim()) {
       queryString += `, default) RETURNING *;`;
     } else {
@@ -26,8 +26,21 @@ const manyPins = (mapID, pins) => {
   }
 };
 
+const deletePin = (userID, pinID) => {
+  return db.query(`
+    UPDATE pins
+    SET active = false
+    FROM maps
+    JOIN users ON users.id = user_id
+    WHERE maps.id = map_id AND user_id = $1 AND pins.id = $2 RETURNING pins.*;`, [userID, pinID]
+  )
+  .then(response => response.rows[0])
+  .catch(err => err)
+};
+
 //EXPORT FUNCTIONS
 module.exports = {
   createPin,
-  manyPins
+  manyPins,
+  deletePin
 };
