@@ -7,5 +7,6 @@ CREATE TABLE pin_reviews (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   stars INTEGER NOT NULL,
   message TEXT,
-  date_created TIMESTAMP NOT NULL
+  date_created TIMESTAMP NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT true
 );
