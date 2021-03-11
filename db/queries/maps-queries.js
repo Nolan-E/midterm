@@ -120,5 +120,6 @@ module.exports = {
   getMapsByID,
   getMapOfPinsByID,
   createNewMap,
-  deleteMap
+  deleteMap,
+  editMap
 };
