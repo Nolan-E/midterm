@@ -80,6 +80,12 @@ const showMapDetails = (details) => {
   `;
   $("#map-info-area").append(mapInformation);
 
+  $.get(`http://localhost:8080/api/maps/${details.map_id}/pins`)
+    .then(response => {
+      console.log('get pins by mapid get request')
+      console.log(response);
+    })
+
   const pinInformation = `
     <div class="card border-dark mb-1 pin-card" id=${details.pin_id}>
       <div class="card-body text-dark">
@@ -135,4 +141,6 @@ $(document).ready(function() {
       })
       .catch(error => console.log(error));
   })
+
+
 });
