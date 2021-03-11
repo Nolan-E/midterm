@@ -2,10 +2,14 @@ const express = require('express');
 const router  = express.Router();
 const {
   getAllMapsAnon,
+  getAvgRatingForMap,
+  getTopRated,
   getAllMapsByUser,
   getMapsByID,
   getMapOfPinsByID,
-  createNewMap
+  createNewMap,
+  deleteMap,
+  editMap
 } = require('../db/queries/maps-queries');
 const {
   getAllFavMaps,
@@ -88,10 +92,7 @@ router.get("/", (req, res) => {
 
 router.get('/mymaps', isLoggedIn, (req, res) => {
   getAllMapsByUser(req.session.user_id)
-    .then(data => {
-      console.log(data)
-      res.send(data);
-    })
+    .then(data => res.send(data));
 });
 
 router.get('/favorites', isLoggedIn, (req, res) => {
