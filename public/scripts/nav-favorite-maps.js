@@ -20,7 +20,7 @@ const showFavoriteMaps = () => {
             </form>
             <form class="form-edit-map">
               <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">Edit Map</button>
+              <button type="submit">Edit Map BUT I DONT THINK THIS BUTTON MAKES SENSE HERE</button>
             </form>
             <form class="form-delete-map">
               <input type="hidden" name="map_id" value="${map.map_id}">

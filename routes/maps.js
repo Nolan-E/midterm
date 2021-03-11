@@ -92,7 +92,10 @@ router.get("/", (req, res) => {
 
 router.get('/mymaps', isLoggedIn, (req, res) => {
   getAllMapsByUser(req.session.user_id)
-    .then(data => res.send(data));
+    .then(data => {
+      console.log('getAllMapsByUser returned the following:', data)
+      return res.send(data)
+    });
 });
 
 router.get('/favorites', isLoggedIn, (req, res) => {
