@@ -19,7 +19,7 @@ function onMapClickAddMarker(e) {
       //  })
       );
     const appendField = `
-      <div class="card border-dark mt-3 mb-1">
+      <div class="card border-dark mt-3 mb-1 create-card">
         <div>
           <label for="pin-title">Name:</label>
           <input type="text" name="pins[${i}][pin-title]" required>

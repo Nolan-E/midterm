@@ -22,7 +22,7 @@ $(document).ready(function() {
     const createMapCard = `
       <h1>Map Creation</h1>
 
-      <div class="card border-dark mt-0 mb-1">
+      <div class="card border-dark mt-0 mb-1 create-card">
         <div class="card-header bg-transparent border-dark">Create a new map</div>
         <div class="card-body text-dark">
           <textarea name="text" id="newMapName" placeholder=" Title your map" required></textarea>

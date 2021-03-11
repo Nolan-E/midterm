@@ -6,7 +6,8 @@ const showExploreMaps = () => {
         $("#map-info-area").append("<h1>Explore Maps</h1>");
         for (const map of maps) {
           const createMapCard = `
-          <div class="card border-primary mb-2">
+          <div class="card border-primary mb-2" id=${map.map_id}>
+            <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
             <div class="card-header">By ${map.created_by}</div>
             <div class="card-body text-primary">
               <h5 class="card-title">${map.map_name}</h5>
@@ -28,13 +29,17 @@ const showExploreMaps = () => {
 };
 
 $(document).ready(function() {
-  $("#nav-explore-maps").on("click", showExploreMaps)
+  $("#nav-explore-maps").on("click", function(){
+    markerGroup.clearLayers();
+    showExploreMaps();
+
+  });
 
   $(document).on("submit", ".add-to-favorites", function(event) {
     event.preventDefault();
     console.log("Added to favorites!");
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post("http://localhost:8080/api/maps/addtofavorites", {mapId})
+    $.post("api/maps/addtofavorites", {mapId})
       .then((data) => {
         console.log('The following entry has been added into the fav_maps table: ', data)
       })

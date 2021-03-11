@@ -6,8 +6,8 @@ const showFavoriteMaps = () => {
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
-        <div class="card border-primary">
-
+        <div class="card border-primary" id=${map.map_id}>
+        <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
           <div class="card-header">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
             <form class="form-map-name">
@@ -102,7 +102,7 @@ $(document).ready(function() {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
     console.log(pinId);
-    $.get(`http://localhost:8080/api/parks/${pinId}`)
+    $.get(`api/pins/${pinId}`)
       .then(pinDetails => {
         console.log('pinDetails are', pinDetails);
         showReviews(pinDetails)

@@ -127,8 +127,9 @@ router.get("/:id", (req,res) => {
 //will recive geojson and user helper function and queries to insert into db
 router.post('/', (req, res) => {
   console.log(req.body.map);
+  const user_id = req.session.user_id;
   const submition = req.body.map;
-  createNewMap(1,submition.name)
+  createNewMap(user_id,submition.name)
     .then(res => {
       console.log(submition.pins);
       manyPins(res.id, submition.pins);
