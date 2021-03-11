@@ -37,10 +37,21 @@ const createNewPinReview = (userID, pinID, pinRevObj) => {
     .then(response => response.rows[0])
     .catch(err => err);
 };
+// Delete a pin review
+const deletePinReview = (userID, pinID) => {
+  return db.query(`
+    UPDATE pin_reviews
+    SET active = false
+    WHERE pin_id = $2 AND user_id = $1 RETURNING *;`, [userID, pinID]
+  )
+    .then(response => response.rows[0])
+    .catch(err => err);
+};
 
 //EXPORT FUNCTIONS
 module.exports = {
   getAllPinReviews,
   getAllReviewsByPin,
-  createNewPinReview
+  createNewPinReview,
+  deletePinReview
 };
