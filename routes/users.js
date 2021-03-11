@@ -14,8 +14,7 @@ router.get("/", (req, res) => {
     ueser: 'wouldn\'t you like to know'
   });
 });
-const { getUserWithEmail } = require('../db//queries/users-queries');
-const { getUserWithID } = require('../db/queries/users-queries');
+const { getUserWithEmail, getUserWithID, addUser } = require('../db//queries/users-queries');
 const { isLoggedIn } = require('../public/scripts/middleware');
 
 
@@ -42,6 +41,23 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(() => res.status(401).send('Login error.'));
+})
+
+router.post("/register", (req, res) => {
+  const registerObj = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password
+  };
+  addUser(registerObj)
+    .then(registeredUser => {
+      console.log('The registered user is', registeredUser);
+      req.session.user_id = registeredUser.id;
+      req.session.user_name = registeredUser.name;
+      req.session.email = registeredUser.email;
+      res.send(req.session.user_name);
+    })
+
 })
 
 router.get("/logout", isLoggedIn, (req, res) => {

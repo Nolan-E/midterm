@@ -77,19 +77,15 @@ const {isLoggedIn} = require('../public/scripts/middleware');
 
 
 // };
-//maps GET Routes
 
-//will get all maps for sidebar display on initial load
 router.get("/", (req, res) => {
   getAllMapsAnon()
     .then(data => {
       res.send(data);
     })
-
-  // res.json(maps);
 });
 
-router.get('/mymaps', (req, res) => {
+router.get('/mymaps', isLoggedIn, (req, res) => {
   getAllMapsByUser(req.session.user_id)
     .then(data => {
       console.log(data)
@@ -97,34 +93,30 @@ router.get('/mymaps', (req, res) => {
     })
 });
 
-//will get all maps for sidedbar that are users favorited maps
-router.get('/favorites', (req, res) => {
+router.get('/favorites', isLoggedIn, (req, res) => {
   getAllFavMaps(req.session.user_id)
   .then(data => {
     console.log('Retrieving favorite maps...', data)
     res.send(data);
   })
-  // res.json({has: 'object that is all maps that have favorite'});
 });
 
-//will get map by name
-router.get("/:id", (req,res) => {
+router.get('/create', isLoggedIn, (req, res) => {
+  res.send('Success');
+})
+
+router.get("/:id", isLoggedIn, (req,res) => {
   const { id } = req.params;
   getMapOfPinsByID(id)
     .then(data => {
-      console.log('Retrieving...', data)
-      res.json(data)
-
+      console.log('Retrieving...', data);
+      res.json(data);
     })
-
-
-  // res.json(dataPoints);
 });
 
 
 //maps POST Routes
 
-//will recive geojson and user helper function and queries to insert into db
 router.post('/', (req, res) => {
   console.log(req.body.map);
   const user_id = req.session.user_id;
@@ -133,13 +125,12 @@ router.post('/', (req, res) => {
     .then(res => {
       console.log(submition.pins);
       manyPins(res.id, submition.pins);
-
     })
     .finally(res.status(200).send('ok'));
 
 });
 
-router.post('/addtofavorites', (req, res) => {
+router.post('/addtofavorites', isLoggedIn, (req, res) => {
   const mapId = req.body.mapId;
   const userId = req.session.user_id;
 
@@ -151,6 +142,11 @@ router.post('/addtofavorites', (req, res) => {
 
 router.post('/edit', (req, res) => {
   res.status(200).send('going to edit something');
+});
+
+router.post('/:id/delete', (req, res) => {
+  console.log('Inside map routes post maps delete');
+  res.send('maps deletion in progress');
 });
 
 module.exports = router;

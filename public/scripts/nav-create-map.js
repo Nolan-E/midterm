@@ -19,24 +19,31 @@ $(document).ready(function() {
   $("#nav-create-map").on("click", function() {
     markerGroup.clearLayers();
     $("#map-info-area").empty();
-    const createMapCard = `
-      <h1>Map Creation</h1>
 
-      <div class="card border-dark mt-0 mb-1 create-card">
-        <div class="card-header bg-transparent border-dark">Create a new map</div>
-        <div class="card-body text-dark">
-          <textarea name="text" id="newMapName" placeholder=" Title your map" required></textarea>
-          <p class="mb-3">Select an spot on the map to drop your markers.</p>
-          <form id="form-create-map" action="">
-            <div id="form-container">
-            </div>
-            <input id="button-create-map" type="submit" value="Create!">
-          </form>
+    $.get('api/maps/create')
+      .then(() => {
+        const createMapCard = `
+        <h1>Map Creation</h1>
 
+        <div class="card border-dark mt-0 mb-1 create-card">
+          <div class="card-header bg-transparent border-dark">Create a new map</div>
+          <div class="card-body text-dark">
+            <textarea name="text" id="newMapName" placeholder=" Title your map" required></textarea>
+            <p class="mb-3">Select an spot on the map to drop your markers.</p>
+            <form id="form-create-map" action="">
+              <div id="form-container">
+              </div>
+              <input id="button-create-map" type="submit" value="Create!">
+            </form>
+
+          </div>
         </div>
-      </div>
-    `;
-    $("#map-info-area").append(createMapCard);
+      `;
+      $("#map-info-area").append(createMapCard);
+      })
+      .catch(error => {
+        $("#map-info-area").append(error.responseText);
+      })
   });
 
 

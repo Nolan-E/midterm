@@ -43,6 +43,6 @@ $(document).ready(function() {
       .then((data) => {
         console.log('The following entry has been added into the fav_maps table: ', data)
       })
-
+      .catch(error => console.log(error));
   })
 })
