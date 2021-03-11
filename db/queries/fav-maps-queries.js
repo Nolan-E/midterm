@@ -16,7 +16,6 @@ const getAllFavMaps = (userID) => {
     .then(response => response.rows)
     .catch(err => err);
 };
-
 // Add a map to my fav maps
 const addToMyFav = (userID, mapID) => {
   return db.query(`
@@ -26,9 +25,20 @@ const addToMyFav = (userID, mapID) => {
     .then(response => response.rows[0])
     .catch(err => err);
 };
+// Add a rating & review to a fav map by user
+const addFavReviewRating = (userID, mapID, rating, review) => {
+  return db.query(`
+    UPDATE fav_maps
+    SET rating = $3, review = $4, last_edit = current_timestamp
+    WHERE user_id = $1 and map_id = $2 RETURNING *;`, [userID, mapID, rating, review] // add current_timestamp to table
+  )
+    .then(response => response.rows[0])
+    .catch(err => err);
+};
 
 //EXPORT FUNCTIONS
 module.exports = {
   getAllFavMaps,
-  addToMyFav
+  addToMyFav,
+  addFavReviewRating
 };
