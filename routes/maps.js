@@ -90,6 +90,10 @@ router.get("/", (req, res) => {
 });
 
 router.get('/mymaps', (req, res) => {
+  // isLoggedIn middleware
+  if (!req.session.user_id) {
+    return res.status(401).send('Please log in to view this content.');
+  }
   getAllMapsByUser(req.session.user_id)
     .then(data => {
       console.log(data)
@@ -99,12 +103,15 @@ router.get('/mymaps', (req, res) => {
 
 //will get all maps for sidedbar that are users favorited maps
 router.get('/favorites', (req, res) => {
+  // isLoggedIn middleware
+  if (!req.session.user_id) {
+    return res.status(401).send('Please log in to view this content.');
+  }
   getAllFavMaps(req.session.user_id)
   .then(data => {
     console.log('Retrieving favorite maps...', data)
     res.send(data);
   })
-  // res.json({has: 'object that is all maps that have favorite'});
 });
 
 //will get map by name

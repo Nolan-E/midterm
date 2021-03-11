@@ -37,6 +37,9 @@ const showFavoriteMaps = () => {
         $("#map-info-area").append(createMapCard);
       }
     })
+    .catch(error => {
+      $("#map-info-area").append(error.responseText);
+    })
 };
 
 const showReviews = (reviews) => {

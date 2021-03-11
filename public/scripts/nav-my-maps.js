@@ -21,6 +21,9 @@ const showMyMaps = () => {
         $("#map-info-area").append(createMapCard);
       }
     })
+    .catch(error => {
+      $("#map-info-area").append(error.responseText);
+    })
 };
 
 
