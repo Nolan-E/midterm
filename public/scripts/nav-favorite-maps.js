@@ -102,7 +102,7 @@ $(document).ready(function() {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
     console.log(pinId);
-    $.get(`http://localhost:8080/api/parks/${pinId}`)
+    $.get(`api/pins/${pinId}`)
       .then(pinDetails => {
         console.log('pinDetails are', pinDetails);
         showReviews(pinDetails)

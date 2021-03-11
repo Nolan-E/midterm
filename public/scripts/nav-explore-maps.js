@@ -30,15 +30,15 @@ const showExploreMaps = () => {
 
 $(document).ready(function() {
   $("#nav-explore-maps").on("click", showExploreMaps)
-  $(document).on('click', '.card', function() {
-    let id = this.id
-    console.log('clicked this:',id);
-  });
+  // $(document).on('click', '.card', function() {
+  //   let id = this.id
+  //   console.log('clicked this:',id);
+  // });
   $(document).on("submit", ".add-to-favorites", function(event) {
     event.preventDefault();
     console.log("Added to favorites!");
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post("http://localhost:8080/api/maps/addtofavorites", {mapId})
+    $.post("api/maps/addtofavorites", {mapId})
       .then((data) => {
         console.log('The following entry has been added into the fav_maps table: ', data)
       })

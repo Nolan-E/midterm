@@ -46,13 +46,13 @@ app.use((req, res, next) => {
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const parksRoutes =  require("./routes/parks");
+const pinsRoutes =  require("./routes/pins");
 const mapsRoutes = require("./routes/maps");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes);
-app.use("/api/parks", parksRoutes);
+app.use("/api/pins", pinsRoutes);
 app.use("/api/maps", mapsRoutes);
 // Note: mount other resources here, using the same pattern above
 
