@@ -106,6 +106,7 @@ $(document).ready(function() {
         console.log('mapdetails are', mapDetails[0]);
         showMapDetails(mapDetails[0]);
       })
+      .catch(error => console.log(error));
   })
 
 

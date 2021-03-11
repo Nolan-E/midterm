@@ -77,23 +77,15 @@ const {isLoggedIn} = require('../public/scripts/middleware');
 
 
 // };
-//maps GET Routes
 
-//will get all maps for sidebar display on initial load
 router.get("/", (req, res) => {
   getAllMapsAnon()
     .then(data => {
       res.send(data);
     })
-
-  // res.json(maps);
 });
 
-router.get('/mymaps', (req, res) => {
-  // isLoggedIn middleware
-  if (!req.session.user_id) {
-    return res.status(401).send('Please log in to view this content.');
-  }
+router.get('/mymaps', isLoggedIn, (req, res) => {
   getAllMapsByUser(req.session.user_id)
     .then(data => {
       console.log(data)
@@ -101,12 +93,7 @@ router.get('/mymaps', (req, res) => {
     })
 });
 
-//will get all maps for sidedbar that are users favorited maps
-router.get('/favorites', (req, res) => {
-  // isLoggedIn middleware
-  if (!req.session.user_id) {
-    return res.status(401).send('Please log in to view this content.');
-  }
+router.get('/favorites', isLoggedIn, (req, res) => {
   getAllFavMaps(req.session.user_id)
   .then(data => {
     console.log('Retrieving favorite maps...', data)
@@ -114,8 +101,11 @@ router.get('/favorites', (req, res) => {
   })
 });
 
-//will get map by name
-router.get("/:id", (req,res) => {
+router.get('/create', isLoggedIn, (req, res) => {
+  res.send('Success');
+})
+
+router.get("/:id", isLoggedIn, (req,res) => {
   const { id } = req.params;
   getMapOfPinsByID(id)
     .then(data => {
@@ -127,7 +117,6 @@ router.get("/:id", (req,res) => {
 
 //maps POST Routes
 
-//will recive geojson and user helper function and queries to insert into db
 router.post('/', (req, res) => {
   console.log(req.body.map);
   const user_id = req.session.user_id;
@@ -141,7 +130,7 @@ router.post('/', (req, res) => {
 
 });
 
-router.post('/addtofavorites', (req, res) => {
+router.post('/addtofavorites', isLoggedIn, (req, res) => {
   const mapId = req.body.mapId;
   const userId = req.session.user_id;
 
