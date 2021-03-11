@@ -7,5 +7,7 @@ CREATE TABLE fav_maps (
   map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
   rating INTEGER,
   review TEXT,
-  fav_date TIMESTAMP NOT NULL
+  fav_date TIMESTAMP NOT NULL,
+  last_edit TIMESTAMP,
+  active BOOLEAN NOT NULL DEFAULT true
 );
