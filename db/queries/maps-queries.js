@@ -42,7 +42,7 @@ const getAllMapsByUser = (userID) => {
     JOIN users ON maps.user_id = users.id
     JOIN fav_maps ON fav_maps.map_id = maps.id
     JOIN pins ON pins.map_id = maps.id
-    WHERE users.id = $1 AND maps.active = true AND pins.active = true
+    WHERE users.id = 2 AND maps.active = true AND pins.active = true
     GROUP BY maps.id, users.name, pins.image_url
     ORDER BY map_created DESC;`, [userID]
   )
