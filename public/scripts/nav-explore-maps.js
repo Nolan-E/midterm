@@ -29,11 +29,12 @@ const showExploreMaps = () => {
 };
 
 $(document).ready(function() {
-  $("#nav-explore-maps").on("click", showExploreMaps)
-  // $(document).on('click', '.card', function() {
-  //   let id = this.id
-  //   console.log('clicked this:',id);
-  // });
+  $("#nav-explore-maps").on("click", function(){
+    markerGroup.clearLayers();
+    showExploreMaps();
+
+  });
+
   $(document).on("submit", ".add-to-favorites", function(event) {
     event.preventDefault();
     console.log("Added to favorites!");
