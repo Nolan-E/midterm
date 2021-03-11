@@ -19,7 +19,6 @@ $(document).ready(function() {
   // Render pins when a map card is clicked.
   $(document).on('click', '.map-card', function() {
     let id = this.id
-    console.log('clicked this:',id);
     $.get(`/api/maps/${id}`)
       .then(maps => {
         markerGroup.clearLayers();
@@ -43,7 +42,6 @@ $(document).ready(function() {
         }
         markerGroup.addTo(mymap);
         mymap.fitBounds(markerGroup.getBounds());
-        console.log('render these:',maps);
       });
   });
 
