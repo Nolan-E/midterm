@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  console.log('inside parks router get');
+  console.log('Console log from pins router file. Get individual pin');
   const pinId = req.params.id;
   getAllReviewsByPin(pinId)
   .then((allReviews) => {
