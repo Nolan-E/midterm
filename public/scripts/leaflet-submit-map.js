@@ -5,32 +5,37 @@ let i = 0;
 let markerGroup = L.featureGroup([]);
 markerGroup.addTo(mymap);
 
-function onMapClickAddMarker(e) {
-    const lat = e.latlng.lat;
-    const lng = e.latlng.lng;
+let editPopup = L.popup({
+  editable: true,
+  removable:true,
+  nametag: `${i}`
 
-    Arr.push([lat, lng])
-    // console.log('Arr is now', Arr);
-    markerGroup.addLayer(marker = L.marker([lat, lng]).addTo(mymap)
-    //  .bindTooltip('click me to edit')
-    .bindPopup(editPopup)
-    //  .on('popupopen', function() {
-      //   this.openPopup();
-      //  })
-      );
-    const appendField = `
-      <div class="card border-dark mt-3 mb-1 create-card">
+}).setContent('delBtn', 'place holder for custom html elment');
+
+
+const onMapClickAddMarker = function(e) {
+  const lat = e.latlng.lat;
+  const lng = e.latlng.lng;
+
+  Arr.push([lat, lng]);
+  // console.log('Arr is now', Arr);
+  markerGroup.addLayer(new L.marker([lat, lng]).addTo(mymap)
+    .bindPopup(editPopup).update()
+
+  );
+  const appendField = `
+      <div class="card border-dark mt-3 mb-1 create-card" id="pin${lat}">
         <div>
           <label for="pin-title">Name:</label>
           <input type="text" name="pins[${i}][pin-title]" required>
         </div>
         <div>
           <label for="pin-latitude">Latitude:</label>
-          <input type="text" name="pins[${i}][pin-latitude]" value=${lat} readonly>
+          <input type="text" name="pins[${i}][pin-latitude]" value=${lat} hidden>
         </div>
         <div>
           <label for="pin-longitude">Longitude:</label>
-          <input type="text" name="pins[${i}][pin-longitude]" value=${lng} readonly>
+          <input type="text" name="pins[${i}][pin-longitude]" value=${lng} hidden>
         </div>
         <div>
           <label for="pin-description">Description:</label>
@@ -39,11 +44,25 @@ function onMapClickAddMarker(e) {
       </div>
     `;
 
-    $("#form-container").append(appendField)
-    $("#form-container").append("<br>")
-    i ++;
-    // console.log('inside', i);
+  $("#form-container").append(appendField);
+  $("#form-container").append("<br>");
+  i ++;
+  // console.log('inside', i);
 
-}
+};
 
 mymap.on('click', onMapClickAddMarker);
+$(document).on("removeMarker", function(e) {
+  let lat = e.detail.marker._latlng.lat;
+  let lng = e.detail.marker._latlng.lng;
+  let mapCard = `pin${lat}`;
+  $(document).contents().remove("#" + mapCard);
+
+  console.log(mapCard);
+});
+document.addEventListener("removeMarker", (e) => {
+
+
+  console.log(e.detail.marker._latlng.lng);
+  console.log(e.detail.marker._latlng.lat);
+});

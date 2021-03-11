@@ -1,4 +1,4 @@
-function chunkArray(myArray, chunk_size){
+const chunkArray = function(myArray, chunk_size) {
   const results = [];
   while (myArray.length) {
     const dummyObj = {
@@ -39,11 +39,11 @@ $(document).ready(function() {
           </div>
         </div>
       `;
-      $("#map-info-area").append(createMapCard);
+        $("#map-info-area").append(createMapCard);
       })
       .catch(error => {
         $("#map-info-area").append(error.responseText);
-      })
+      });
   });
 
 
