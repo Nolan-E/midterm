@@ -24,21 +24,23 @@ $(document).ready(function() {
       .then(maps => {
         markerGroup.clearLayers();
         for (const pin of maps) {
+          console.log('each of the pins details are:', pin)
           markerGroup.addLayer(marker = L.marker([pin.pin_lat, pin.pin_lng]).addTo(mymap));
           markerGroup.eachLayer(function(layer) {
-            layer.bindPopup(`<div class="card border-primary mb-2 pin-pop">
-            <img src="https://images.unsplash.com/photo-1546421845-6471bdcf3edf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZ3N8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60 class="card-img-top">
-            <div class="card-body text-primary">
-            <h5 class="card-title">${pin.pin_title}</h5>
-            <small id="map-author-rating">
-              <p class="card-text">Rating: ${pin.review}/5</p>
-              <p class="card-text">${pin.pin_description}</p>
-            </small>
-            </div>
-           `,{
+            layer.bindPopup(`
+              <div class="card border-primary mb-2 pin-pop">
+              <img src="https://images.unsplash.com/photo-1546421845-6471bdcf3edf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZ3N8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60 class="card-img-top">
+              <div class="card-body text-primary">
+              <h5 class="card-title">${pin.pin_title}</h5>
+              <small id="map-author-rating">
+                <p class="card-text">Rating: ${Number(pin.rating)}/5</p>
+                <p class="card-text">${pin.pin_description}</p>
+              </small>
+              </div>
+            `, {
               removable: true,
               editable: false,
-            });
+              });
           });
         }
         markerGroup.addTo(mymap);
