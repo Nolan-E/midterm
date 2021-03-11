@@ -112,9 +112,9 @@ router.get('/:id/pins', (req, res) => {
   const mapID = req.params.id;
   getPinsByMapID(mapID)
   .then(response => {
-    console.log('getpinsbymapid gave me', response);
+    console.log('getpinsbymapid gave me', response)
+    res.send(response);
   })
-  res.send('hello');
 })
 
 router.get("/:id", isLoggedIn, (req,res) => {

@@ -81,24 +81,24 @@ const showMapDetails = (details) => {
   $("#map-info-area").append(mapInformation);
 
   $.get(`http://localhost:8080/api/maps/${details.map_id}/pins`)
-    .then(response => {
-      console.log('get pins by mapid get request')
-      console.log(response);
+    .then(pins => {
+      for (const pin of pins) {
+        const pinInformation = `
+          <div class="card border-dark mb-1 pin-card" id=${pin.id}>
+            <div class="card-body text-dark">
+              <h5 class="card-title">pin.title ${pin.title}</h5>
+              <p>pin.id ${pin.id}</p>
+              <p>pin.lat ${pin.lat}</p>
+              <p>pin.lng ${pin.lng}</p>
+              <p>pin.image_url ${pin.image_url}</p>
+              <p>pin.map_id ${pin.map_id}</p>
+              <p>pin.description ${pin.description}</p>
+            </div>
+          </div>
+        `;
+        $("#map-info-area").append(pinInformation);
+      }
     })
-
-  const pinInformation = `
-    <div class="card border-dark mb-1 pin-card" id=${details.pin_id}>
-      <div class="card-body text-dark">
-        <h5 class="card-title">pin_title ${details.pin_title}</h5>
-        <p>pin_id ${details.pin_id}</p>
-        <p>pin_lat ${details.pin_lat}</p>
-        <p>pin_lng ${details.pin_lng}</p>
-        <p>pin_description ${details.pin_description}</p>
-      </div>
-    </div>
-  `;
-  $("#map-info-area").append(pinInformation);
-
 };
 
 $(document).ready(function() {
