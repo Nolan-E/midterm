@@ -56,7 +56,8 @@ $(document).on("removeMarker", function(e) {
   let lat = e.detail.marker._latlng.lat;
   let lng = e.detail.marker._latlng.lng;
   let mapCard = `pin${lat}`;
-  $("#form-container").contents().remove("#" + mapCard);
+  $(document).contents().remove("#" + mapCard);
+
   console.log(mapCard);
 });
 document.addEventListener("removeMarker", (e) => {

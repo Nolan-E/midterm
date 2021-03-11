@@ -37,7 +37,7 @@ $(document).ready(function() {
             </div>
            `,{
               removable: true,
-              editable: true,
+              editable: false,
             });
           });
         }
