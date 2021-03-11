@@ -2,7 +2,7 @@ const showFavoriteMaps = () => {
   $("#map-info-area").empty()
   $.get("api/maps/favorites")
     .then(maps => {
-      // console.log('Retrieved data is', maps)
+      console.log('Retrieved data is', maps)
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
         const createMapCard = `
@@ -24,7 +24,7 @@ const showFavoriteMaps = () => {
             </form>
             <form class="form-delete-map">
               <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">Remove map from favorites</button>
+              <button type="submit">Delete Map</button>
             </form>
 
             <small id="map-author-rating">
@@ -80,29 +80,19 @@ const showMapDetails = (details) => {
   `;
   $("#map-info-area").append(mapInformation);
 
-  $.get(`http://localhost:8080/api/maps/${details.map_id}/pins`)
-    .then(pins => {
-      for (const pin of pins) {
-        const pinInformation = `
-          <div class="card border-dark mb-1 pin-card" id=${pin.id}>
-            <div class="card-body text-dark">
-              <h5 class="card-title">pin.title ${pin.title}</h5>
-              <p>pin.id ${pin.id}</p>
-              <p>pin.lat ${pin.lat}</p>
-              <p>pin.lng ${pin.lng}</p>
-              <p>pin.image_url ${pin.image_url}</p>
-              <p>pin.map_id ${pin.map_id}</p>
-              <p>pin.description ${pin.description}</p>
-            </div>
-            <form class="form-delete-pin">
-              <input type="hidden" name="pinId" value="${pin.id}">
-              <button type="submit">Delete Pin</button>
-            </form>
-          </div>
-        `;
-        $("#map-info-area").append(pinInformation);
-      }
-    })
+  const pinInformation = `
+    <div class="card border-dark mb-1 pin-card" id=${details.pin_id}>
+      <div class="card-body text-dark">
+        <h5 class="card-title">pin_title ${details.pin_title}</h5>
+        <p>pin_id ${details.pin_id}</p>
+        <p>pin_lat ${details.pin_lat}</p>
+        <p>pin_lng ${details.pin_lng}</p>
+        <p>pin_description ${details.pin_description}</p>
+      </div>
+    </div>
+  `;
+  $("#map-info-area").append(pinInformation);
+
 };
 
 $(document).ready(function() {
@@ -113,7 +103,7 @@ $(document).ready(function() {
     const mapId = Number($(this).serializeArray()[0].value);
     $.get(`http://localhost:8080/api/maps/${mapId}`)
       .then(mapDetails => {
-        console.log('This map has the following pins are:', mapDetails[0]);
+        console.log('mapdetails are', mapDetails[0]);
         showMapDetails(mapDetails[0]);
       })
       .catch(error => console.log(error));
@@ -145,19 +135,4 @@ $(document).ready(function() {
       })
       .catch(error => console.log(error));
   })
-
-  $(document).on("submit", ".form-delete-pin", function(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    console.log("delete pin button clicked");
-    const pinId = Number($(this).serializeArray()[0].value);
-    console.log('this pins id is', pinId);
-    $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
-      .then(response => {
-        console.log('after post, the response received is', response);
-      })
-      .catch(error => console.log(error));
-  })
-
-
 });

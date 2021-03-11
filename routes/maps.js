@@ -16,8 +16,7 @@ const {
   addToMyFav
 } = require('../db/queries/fav-maps-queries');
 const {createPin,
-  manyPins,
-  getPinsByMapID
+  manyPins
 } = require('../db/queries/pins-queries.js');
 const {deleteMyFav} = require('../db/queries/fav-maps-queries');
 const {isLoggedIn} = require('../public/scripts/middleware');
@@ -106,15 +105,6 @@ router.get('/favorites', isLoggedIn, (req, res) => {
 
 router.get('/create', isLoggedIn, (req, res) => {
   res.send('Success');
-})
-
-router.get('/:id/pins', (req, res) => {
-  const mapID = req.params.id;
-  getPinsByMapID(mapID)
-  .then(response => {
-    console.log('getpinsbymapid gave me', response)
-    res.send(response);
-  })
 })
 
 router.get("/:id", isLoggedIn, (req,res) => {
