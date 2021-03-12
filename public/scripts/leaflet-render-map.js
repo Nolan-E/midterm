@@ -49,18 +49,38 @@ L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KSgZl5R17
 // });
 //pointLayer.addData(data_points);
 $(document).ready(function() {
-
-  // will alert user and then contain button to approve use of location or not.
-  // alert(`some maps would like to use your location \n need to add confirm or deny button`);
-  // $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
-  //   .then(res =>
-  //     $.ajax(`https://freegeoip.app/json/${res.ip}`))
-  //   .then(res => {
-  //     // console.log(res);
-  //     const lat = res.latitude;
-  //     const long = res.longitude;
-  //     mymap.setView([lat,long], 13);
-  //   });
-  // mymap.addLayer(pointLayer);
+// Centers the view on a single pin when a pin-card is clicked.
+  $(document).on('click', '.pin-card', function() {
+    let id = Number(this.id);
+    $.get(`/api/pins/${id}`)
+      .then(pins => {
+        //markerGroup.clearLayers();
+        let marker;
+        for (const pin of pins) {
+          if (pin.pin_id === id) {
+            marker = new L.Marker([pin.pin_lat, pin.pin_lng]).bindPopup(
+              `<div class="card border-primary mb-2 pin-pop">
+              <img src="https://images.unsplash.com/photo-1546421845-6471bdcf3edf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvZ3N8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60 class="card-img-top">
+              <div class="card-body text-primary">
+              <h5 class="card-title">${pin.pin_title}</h5>
+              <small id="map-author-rating">
+                <p class="card-text">Rating: ${pin.review}/5</p>
+                <p class="card-text">${pin.pin_description}</p>
+              </small>
+              </div>
+            `,{
+                removable: true,
+                editable: false,
+                nametag: `${pin.pin_title}`
+              });
+              console.log(marker);
+            markerGroup.addLayer(marker);
+            marker = null;
+          }
+        }
+        markerGroup.addTo(mymap);
+        mymap.fitBounds(markerGroup.getBounds());
+      });
+  });
 
 });
