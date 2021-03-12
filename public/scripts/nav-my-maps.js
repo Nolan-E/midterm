@@ -29,7 +29,7 @@ const showMyMaps = () => {
               </form>
 
               <small id="map-author-rating">
-                <p class="card-text">Rating: ${map.rating}/5</p>
+                <p class="card-text">${ratingStr}</p>
                 <p class="card-text">${map.map_created}</p>
               </small>
             </div>
