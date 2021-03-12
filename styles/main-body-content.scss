@@ -30,7 +30,10 @@
   align-items: center;
   overflow: auto;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.19);
-
+  .imgContainer{
+    overflow: auto;
+    height: 20vh;
+  }
   .card {
     width: 95%;
     opacity: 0.7;
@@ -38,6 +41,7 @@
   .card:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     opacity: 1;
+    border: solid 1px rgba(104, 104, 252, 0.842);
   }
 
   #map-author-rating {
