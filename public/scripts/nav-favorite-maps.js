@@ -45,8 +45,8 @@ const showFavoriteMaps = function() {
 };
 
 const showReviews = (reviews) => {
-  console.log(reviews);
-  $("#map-info-area").empty();
+  // console.log(reviews);
+  $("#map-info-area").empty()
   $("#map-info-area").append("<h1>User Reviews</h1>");
 
 
@@ -136,10 +136,12 @@ $(document).ready(function() {
   $(document).on("submit", ".form-map-name", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    console.log('the mapid is', mapId);
+    // console.log('the mapid is', mapId)
+
+    // Refresh left bar to show map details
     $.get(`http://localhost:8080/api/maps/${mapId}`)
       .then(mapDetails => {
-        console.log('This map has the following details:', mapDetails);
+        // console.log('This map has the following details:', mapDetails);
         showMapDetails(mapDetails[0]);
       })
       .catch(error => console.log(error));
@@ -148,7 +150,7 @@ $(document).ready(function() {
   $(document).on("submit", ".form-see-reviews", function(event) {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
-    console.log(pinId);
+    // console.log(pinId);
     $.get(`api/pins/${pinId}`)
       .then(pinDetails => {
         console.log('pinDetails are', pinDetails);
@@ -161,7 +163,7 @@ $(document).ready(function() {
     const mapId = Number($(this).serializeArray()[0].value);
     $.post(`http://localhost:8080/api/maps/${mapId}/deletefromfavorites`, {mapId})
       .then((data) => {
-        console.log('Delete Map > Then > Received data is:', data);
+        // console.log('Delete Map > Then > Received data is:', data)
         showFavoriteMaps();
       })
       .catch(error => console.log(error));
@@ -180,7 +182,7 @@ $(document).ready(function() {
         if (response === 'authorized') {
           $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
             .then(response => {
-              console.log('after post, the response received is', response);
+              // console.log('after post, the response received is', response);
             })
             .catch(error => console.log(error));
         }
@@ -215,7 +217,13 @@ $(document).ready(function() {
         if (response === 'authorized') {
           $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
             .then(response => {
-              showMyMaps();
+              // Refresh left bar to show map details
+              $.get(`http://localhost:8080/api/maps/${mapId}`)
+                .then(mapDetails => {
+                  // console.log('This map has the following details:', mapDetails);
+                  showMapDetails(mapDetails[0]);
+                })
+
               alert(response);
             })
             .catch(error => alert(error));
@@ -225,6 +233,4 @@ $(document).ready(function() {
         return alert(`${error.status}: ${error.responseText}`);
       })
   });
-
-
 });
