@@ -94,7 +94,7 @@ router.get("/", (req, res) => {
 router.get('/mymaps', isLoggedIn, (req, res) => {
   getAllMapsByUser(req.session.user_id)
     .then(data => {
-      console.log('getAllMapsByUser returned the following:', data)
+      // console.log('getAllMapsByUser returned the following:', data)
       return res.send(data)
     });
 });
@@ -167,6 +167,20 @@ router.post('/edit', (req, res) => {
 });
 
 router.post('/:id/delete', (req, res) => {
+  const { mapId } = req.body;
+  const userId = req.session.user_id;
+  console.log('mapId', mapId, 'userId', userId)
+  deleteMap(userId, mapId)
+    .then(() => {
+      console.log(`mapId of ${mapId} and userId of ${userId} has been deleted.`);
+      return res.send('Map removed from favorites.');
+    })
+    .catch(error => {
+      return res.status(404).send(`Could not delete this map. Error message: ${error}`);
+    })
+});
+
+router.post('/:id/deletefromfavorites', (req, res) => {
   const { mapId } = req.body;
   const userId = req.session.user_id;
   deleteMyFav(userId, mapId)

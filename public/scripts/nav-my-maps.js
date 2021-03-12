@@ -45,4 +45,17 @@ const showMyMaps = () => {
 
 $(document).ready(function() {
   $("#nav-my-maps").on("click", showMyMaps);
+
+  $(document).on("submit", ".form-delete-map", function(event) {
+    event.preventDefault();
+    const mapId = Number($(this).serializeArray()[0].value);
+    console.log('mapId', mapId)
+    $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
+      .then((data) => {
+        console.log('Delete Map > Then > Received data is:', data)
+        showFavoriteMaps();
+      })
+      .catch(error => console.log(error));
+  })
+
 });
