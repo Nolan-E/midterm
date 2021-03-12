@@ -181,7 +181,14 @@ $(document).ready(function() {
 
         if (response === 'authorized') {
           $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
-            .then(response => {
+            .then(() => {
+
+              // Refresh left bar to show map details
+              $.get(`http://localhost:8080/api/maps/${mapId}`)
+                .then(mapDetails => {
+                  // console.log('This map has the following details:', mapDetails);
+                  showMapDetails(mapDetails[0]);
+                })
               // console.log('after post, the response received is', response);
             })
             .catch(error => console.log(error));
