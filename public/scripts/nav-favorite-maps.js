@@ -181,18 +181,28 @@ $(document).ready(function() {
         // console.log('the resultof posting to myuserid is', response)
 
         if (response === 'authorized') {
-          $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
-            .then(() => {
+          console.log('You own this map!')
+          $.get(`http://localhost:8080/api/maps/${mapId}`)
+            .then(response => {
+              console.log('@@@@@@@', response);
+              if (response.length !== 1) {
 
-              // Refresh left bar to show map details
-              $.get(`http://localhost:8080/api/maps/${mapId}`)
-                .then(mapDetails => {
-                  // console.log('This map has the following details:', mapDetails);
-                  showMapDetails(mapDetails[0]);
-                })
-              // console.log('after post, the response received is', response);
+                $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
+                    .then(() => {
+                      // Refresh left bar to show map details
+                      $.get(`http://localhost:8080/api/maps/${mapId}`)
+                        .then(mapDetails => {
+                          // console.log('This map has the following details:', mapDetails);
+                          showMapDetails(mapDetails[0]);
+                        })
+                      // console.log('after post, the response received is', response);
+                    })
+                    .catch(error => console.log(error));
+
+              } else {
+                alert('This is the last pin on this map. Please delete the map instead to delete this pin.');
+              }
             })
-            .catch(error => console.log(error));
         }
       })
       .catch(error => {
