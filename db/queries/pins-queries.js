@@ -18,7 +18,7 @@ const createPin = (mapID, pin) => {
     .then(response => response.rows[0])
     .catch(err => err);
 };
-// Loop through geoJSON of many pins
+// Loop through response.rows array and create a pin for each element
 const manyPins = (mapID, pins) => {
   for (const elem of pins) {
     createPin(mapID, elem);
