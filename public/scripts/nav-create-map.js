@@ -70,11 +70,7 @@ $(document).ready(function() {
       },
       dataType: "json"
     })
-    showMyMaps();
+    setTimeout(function() {showMyMaps()}, 2000);
     alert('Map created.');
-
-
-
-
   });
 });

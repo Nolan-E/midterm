@@ -175,6 +175,7 @@ $(document).ready(function() {
     const pinId = Number($(this).serializeArray()[0].value);
     const mapId = Number($(this).serializeArray()[1].value);
 
+    // check if the current user is the actual author. only author should be able to edit/delete
     $.post("api/users/myuserid", {pinId, mapId})
       .then(response => {
         // console.log('the resultof posting to myuserid is', response)
