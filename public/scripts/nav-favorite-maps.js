@@ -1,10 +1,16 @@
-const showFavoriteMaps = () => {
-  $("#map-info-area").empty()
+const showFavoriteMaps = function() {
+  $("#map-info-area").empty();
   $.get("api/maps/favorites")
     .then(maps => {
-      console.log('Retrieved data is', maps)
+      console.log('Retrieved data is', maps);
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
+        let ratingStr = '';
+        if (map.rating) {
+          ratingStr = `Rating: ${map.rating}`;
+        } else {
+          ratingStr = `No rating`;
+        }
         const createMapCard = `
         <div class="card border-primary map-card" id=${map.map_id}>
         <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
@@ -35,12 +41,12 @@ const showFavoriteMaps = () => {
     })
     .catch(error => {
       $("#map-info-area").append(error.responseText);
-    })
+    });
 };
 
 const showReviews = (reviews) => {
   console.log(reviews);
-  $("#map-info-area").empty()
+  $("#map-info-area").empty();
   $("#map-info-area").append("<h1>User Reviews</h1>");
 
 
@@ -121,7 +127,7 @@ const showMapDetails = (details) => {
         `;
         $("#map-info-area").append(pinInformation);
       }
-    })
+    });
 };
 
 $(document).ready(function() {
@@ -130,14 +136,14 @@ $(document).ready(function() {
   $(document).on("submit", ".form-map-name", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    console.log('the mapid is', mapId)
+    console.log('the mapid is', mapId);
     $.get(`http://localhost:8080/api/maps/${mapId}`)
       .then(mapDetails => {
         console.log('This map has the following details:', mapDetails);
         showMapDetails(mapDetails[0]);
       })
       .catch(error => console.log(error));
-  })
+  });
 
   $(document).on("submit", ".form-see-reviews", function(event) {
     event.preventDefault();
@@ -146,20 +152,20 @@ $(document).ready(function() {
     $.get(`api/pins/${pinId}`)
       .then(pinDetails => {
         console.log('pinDetails are', pinDetails);
-        showReviews(pinDetails)
-      })
-  })
+        showReviews(pinDetails);
+      });
+  });
 
   $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
     $.post(`http://localhost:8080/api/maps/${mapId}/deletefromfavorites`, {mapId})
       .then((data) => {
-        console.log('Delete Map > Then > Received data is:', data)
+        console.log('Delete Map > Then > Received data is:', data);
         showFavoriteMaps();
       })
       .catch(error => console.log(error));
-  })
+  });
 
   $(document).on("submit", ".form-delete-pin", function(event) {
     event.stopPropagation();
@@ -169,7 +175,7 @@ $(document).ready(function() {
 
     $.post("api/users/myuserid", {pinId, mapId})
       .then(response => {
-        console.log('the resultof posting to myuserid is', response)
+        console.log('the resultof posting to myuserid is', response);
 
         if (response === 'authorized') {
           $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
@@ -181,8 +187,8 @@ $(document).ready(function() {
       })
       .catch(error => {
         return alert(`${error.status}: ${error.responseText}`);
-      })
-    });
+      });
+  });
 
   $(document).on("submit", ".form-edit-map", function(event) {
     event.preventDefault();
@@ -190,8 +196,8 @@ $(document).ready(function() {
     $.each($(this).serializeArray(), function() {
       formDataAsArray.push(this.value);
     });
-    console.log('formDataAsArray', formDataAsArray)
-    const pinId = formDataAsArray[5]
+    console.log('formDataAsArray', formDataAsArray);
+    const pinId = formDataAsArray[5];
     const mapId = formDataAsArray[6];
     const pinUpdateObj = {
       title: formDataAsArray[0],

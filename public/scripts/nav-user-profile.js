@@ -22,22 +22,24 @@ const modalUserInfo =  function(userInfo) {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-      <div class="modal-profile image">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png">
+      <div class="modal-body d-flex">
+      <div class="modal-profile-image w-25">
+        <img class="w-75 border" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png">
       </div>
-      <div>${userInfo.name}
-      <div>#${userInfo.id}</div>
+      <div class="d-flex flex-column">
+      <div>${userInfo.name} <span class="text-muted">#${userInfo.id}<span></div>
+      <div></div>
+      <div>Email: ${userInfo.email}</div>
+      <div> Community Maps Contributed:</div>
       </div>
-        <div>Email: ${userInfo.email}</div>
         </div>
-        <div class="Profile
-        <p class="link-favorite-maps">My favorite Maps</p>
-        <p class="link-my-maps ">All Maps</p>
+        <div class="Profile d-flex justify-content-between">
+        <p class="link-favorite-maps p-2"> <a href="#" class="text-secondary">My favorite Maps</a></p>
+        <p class="link-my-maps p-2"><a href="#" class="text-secondary">All Maps</a></p>
+        </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
 </div>
@@ -65,6 +67,13 @@ $(document).ready(function() {
     $('#nav-user-profile').trigger('focus');
 
   });
-  $(document).on("click", ".link-favorite-maps", showFavoriteMaps);
-  $(document).on("click", ".link-my-maps", showMyMaps);
+  $(document).on("click", ".link-favorite-maps", function() {
+    $('.modal-backdrop').remove();
+    showFavoriteMaps();
+
+  });
+  $(document).on("click", ".link-my-maps", function() {
+    $('.modal-backdrop').remove();
+    showMyMaps();
+  });
 });
