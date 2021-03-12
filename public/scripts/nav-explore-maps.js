@@ -18,6 +18,10 @@ const showExploreMaps = () => {
             <div class="card-header">By ${map.created_by}</div>
             <div class="card-body text-primary">
               <h5 class="card-title">${map.map_name}</h5>
+              <form class="form-map-name">
+                <input type="hidden" name="map_id" value="${map.map_id}">
+                <button type="submit">${map.map_name} (Click to see more details)</button>
+              </form>
               <small id="map-author-rating">
                 <p class="card-text">${ratingStr}</p>
                 <p class="card-text">${map.map_created}</p>
