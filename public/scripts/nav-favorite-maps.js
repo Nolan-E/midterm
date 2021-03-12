@@ -139,7 +139,7 @@ $(document).ready(function() {
   $(document).on("submit", ".form-map-name", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    // console.log('the mapid is', mapId)
+    // console.log('the mapid is', mapId);
 
     // Refresh left bar to show map details
     $.get(`http://localhost:8080/api/maps/${mapId}`)
@@ -156,17 +156,17 @@ $(document).ready(function() {
     // console.log(pinId);
     $.get(`api/pins/${pinId}`)
       .then(pinDetails => {
-        console.log('pinDetails are', pinDetails);
+        // console.log('pinDetails are', pinDetails);
         showReviews(pinDetails);
-      });
-  });
+      })
+  })
 
   $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
     $.post(`http://localhost:8080/api/maps/${mapId}/deletefromfavorites`, {mapId})
       .then((data) => {
-        // console.log('Delete Map > Then > Received data is:', data)
+        // console.log('Delete Map > Then > Received data is:', data);
         showFavoriteMaps();
       })
       .catch(error => console.log(error));
