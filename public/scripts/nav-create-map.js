@@ -3,9 +3,9 @@ const chunkArray = function(myArray, chunk_size) {
   while (myArray.length) {
     const dummyObj = {
       "pinName": myArray[0],
-      "pinLat": myArray[1],
-      "pinLng": myArray[2],
-      "pinDesc": myArray[3]
+      "pinLat": myArray[2],
+      "pinLng": myArray[3],
+      "pinDesc": myArray[1]
     };
     results.push(dummyObj);
     myArray.splice(0, chunk_size);
