@@ -13,13 +13,11 @@ router.post("/:id/delete", (req, res) => {
   console.log("Trying to delete the pin now...");
   const userId = req.session.user_id;
   const pinId = req.params.id;
-  console.log('deletePin', userId, pinId)
   deletePin(userId, pinId)
     .then((response) => {
       if (!response) {
         return res.send("Error deleting pin.");
       }
-      // console.log('rresponse from db is', response)
       res.send("Pin has been deleted");
     })
     .catch(error => {

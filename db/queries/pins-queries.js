@@ -54,7 +54,7 @@ const getPinsByMapID = (mapID) => {
   return db.query(`
     SELECT *
     FROM pins
-    WHERE map_id = $1
+    WHERE map_id = $1 AND active = true
     ORDER BY lat;`, [mapID]
   )
     .then(response => response.rows)

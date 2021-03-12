@@ -30,9 +30,21 @@ const addUser = (user) => {
   .catch(err => err);
 };
 
+// Get the owner of a map with a mapID
+const getUserIDWithMapID = (mapID) => {
+  return db.query(`
+    SELECT user_id
+    FROM maps
+    WHERE id = $1;
+  `, [mapID])
+  .then(response => response.rows[0])
+  .catch(err => err);
+};
+
 //EXPORT FUNCTIONS
 module.exports = {
   getUserWithEmail,
   getUserWithID,
-  addUser
+  addUser,
+  getUserIDWithMapID
 };

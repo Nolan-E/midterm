@@ -42,6 +42,7 @@ $(document).ready(function() {
         }
         markerGroup.addTo(mymap);
         mymap.fitBounds(markerGroup.getBounds());
+        // console.log('render these:',maps);
       });
   });
 

@@ -93,6 +93,7 @@ const showMapDetails = (details) => {
             </div>
             <form class="form-delete-pin">
               <input type="hidden" name="pinId" value="${pin.id}">
+              <input type="hidden" name="mapId" value="${details.map_id}">
               <button type="submit">Delete Pin</button>
             </form>
           </div>
@@ -109,9 +110,10 @@ $(document).ready(function() {
   $(document).on("submit", ".form-map-name", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
+    console.log('the mapid is', mapId)
     $.get(`http://localhost:8080/api/maps/${mapId}`)
       .then(mapDetails => {
-        console.log('This map has the following pins are:', mapDetails[0]);
+        console.log('This map has the following details:', mapDetails);
         showMapDetails(mapDetails[0]);
       })
       .catch(error => console.log(error));
@@ -145,13 +147,24 @@ $(document).ready(function() {
   $(document).on("submit", ".form-delete-pin", function(event) {
     event.stopPropagation();
     event.preventDefault();
-    console.log("delete pin button clicked");
     const pinId = Number($(this).serializeArray()[0].value);
-    console.log('this pins id is', pinId);
-    $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
+    const mapId = Number($(this).serializeArray()[1].value);
+
+    $.post("api/users/myuserid", {pinId, mapId})
       .then(response => {
-        console.log('after post, the response received is', response);
+        console.log('the resultof posting to myuserid is', response)
+
+        if (response === 'authorized') {
+          $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
+            .then(response => {
+              console.log('after post, the response received is', response);
+            })
+            .catch(error => console.log(error));
+
+        }
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        return alert(`${error.status}: ${error.responseText}`);
+      })
     });
 });
