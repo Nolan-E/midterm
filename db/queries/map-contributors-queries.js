@@ -9,7 +9,6 @@ const editMap = (mapID, userID) => {
   .then(response => response.rows[0])
   .catch(err => err);
 };
-
 // Gets a list of all maps by creator
 const getRecentEdits = (mapID) => {
   return db.query(`
