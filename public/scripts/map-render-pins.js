@@ -72,13 +72,14 @@ $(document).ready(function() {
              `,{
                 removable: true,
                 editable: false,
-                nametag: `${pin.pin_title}`
+                nametag: `${pin.pin_title}`,
+                autoPan: true
               });
-              mymap.panTo([pin.pin_lat, pin.pin_lng]);
+            mymap.panTo([pin.pin_lat, pin.pin_lng]);
             markerGroup.addLayer(marker);
             marker = null;
-            }
           }
+        }
         markerGroup.addTo(mymap);
       });
   });

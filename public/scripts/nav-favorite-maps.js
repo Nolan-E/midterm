@@ -12,25 +12,25 @@ const showFavoriteMaps = function() {
           ratingStr = `No rating`;
         }
         const createMapCard = `
-        <div class="card map-card p-2" id=${map.map_id}>
+        <div class="card map-card p-1" id=${map.map_id}>
         <div class="imgContainer card-img-top d-flex align-items-center-center">
         <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top mx-auto d-block">
         </div>
-          <div class="card-header text-small p-1">Map by: ${map.created_by}</div>
+          <div class="card-header p-1">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
           <h5 class="card-title">${map.map_name}</h5>
+          <form class="form-see-reviews">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit"class="btn btn-sm btn-outline-secondary">See Reviews</button>
+          </form>
           <small id="map-author-rating">
           <p class="card-text">Rating: ${map.rating}/5</p>
           <p class="card-text">${map.map_created}</p>
           </small>
-          <div class="d-flex flex-row justify-content-between">
+          <div class="d-flex justify-content-between">
           <form class="form-map-name">
             <input type="hidden" name="map_id" value="${map.map_id}">
             <button type="submit" class="btn btn-outline-primary"><i class="bi bi-info"></i></button>
-          </form>
-          <form class="form-see-reviews">
-            <input type="hidden" name="map_id" value="${map.map_id}">
-            <button type="submit"class="btn btn-outline-secondary">See Reviews</button>
           </form>
           <form class="form-delete-favorite">
             <input type="hidden" name="map_id" value="${map.map_id}">
@@ -164,8 +164,8 @@ $(document).ready(function() {
       .then(pinDetails => {
         // console.log('pinDetails are', pinDetails);
         showReviews(pinDetails);
-      })
-  })
+      });
+  });
 
   $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
