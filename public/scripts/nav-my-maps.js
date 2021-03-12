@@ -1,5 +1,5 @@
 const showMyMaps = () => {
-  console.log('###CLICKED###')
+  // console.log('###CLICKED###')
   $("#map-info-area").empty()
   $.get("api/maps/mymaps")
     .then(maps => {
@@ -20,16 +20,14 @@ const showMyMaps = () => {
               <h5 class="card-title">${map.map_name}</h5>
               <form class="form-map-name">
                 <input type="hidden" name="map_id" value="${map.map_id}">
-                <button type="submit">${map.map_name}</button>
+                <button type="submit">${map.map_name} (Click for more details)</button>
               </form>
-              <form class="form-edit-map">
-                <input type="hidden" name="map_id" value="${map.map_id}">
-                <button type="submit">Edit Map</button>
-              </form>
+
               <form class="form-delete-map">
                 <input type="hidden" name="map_id" value="${map.map_id}">
                 <button type="submit">Delete this map</button>
               </form>
+
               <small id="map-author-rating">
                 <p class="card-text">Rating: ${map.rating}/5</p>
                 <p class="card-text">${map.map_created}</p>
@@ -47,10 +45,4 @@ const showMyMaps = () => {
 
 $(document).ready(function() {
   $("#nav-my-maps").on("click", showMyMaps);
-
-  $(document).on("submit", ".form-edit-map", function(event) {
-    alert('This still needs to be implemented. Do this after Eric figures out how to manipulate on create map.');
-  });
-
-
 });

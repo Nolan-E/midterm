@@ -61,6 +61,7 @@ const showReviews = (reviews) => {
 };
 
 const showMapDetails = (details) => {
+  // console.log('details are', details)
   $("#map-info-area").empty();
   const mapInformation = `
     <div class="card border-primary mb-1">
@@ -84,13 +85,33 @@ const showMapDetails = (details) => {
           <div class="card border-dark mb-1 pin-card" id=${pin.id}>
             <div class="card-body text-dark">
               <h5 class="card-title">pin.title ${pin.title}</h5>
-              <p>pin.id ${pin.id}</p>
-              <p>pin.lat ${pin.lat}</p>
-              <p>pin.lng ${pin.lng}</p>
-              <p>pin.image_url ${pin.image_url}</p>
-              <p>pin.map_id ${pin.map_id}</p>
-              <p>pin.description ${pin.description}</p>
             </div>
+            <form class="form-edit-map">
+            <div class="form-group mb-2 form-inline">
+              <label for="pin.title">pin.title</label>
+              <input class="form-control" type="text" name="pin.title" placeholder="pin.title" value=${pin.title}>
+            </div>
+            <div class="form-group mb-2 form-inline">
+              <label for="pin.lat">pin.lat</label>
+              <input class="form-control" type="number" name="pin.lat" placeholder="pin.lat" value=${pin.lat}>
+            </div>
+            <div class="form-group mb-2 form-inline">
+              <label for="pin.lng">pin.lng</label>
+              <input class="form-control" type="number" name="pin.lng" placeholder="pin.lng" value=${pin.lng}>
+            </div>
+            <div class="form-group mb-2 form-inline">
+              <label for="pin.image_url">pin.image_url</label>
+              <input class="form-control" type="text" name="pin.image_url" placeholder="pin.image_url" value=${pin.image_url}>
+            </div>
+            <div class="form-group mb-2 form-inline">
+              <label for="pin.description">pin.description</label>
+              <input class="form-control" type="text" name="pin.description" placeholder="pin.description" value=${pin.description}>
+            </div>
+              <input type="hidden" name="pin_id" value="${pin.id}">
+              <input type="hidden" name="map_id" value="${pin.map_id}">
+              <button type="submit">Update Pin</button>
+            </form>
+
             <form class="form-delete-pin">
               <input type="hidden" name="pinId" value="${pin.id}">
               <input type="hidden" name="mapId" value="${details.map_id}">
@@ -101,7 +122,6 @@ const showMapDetails = (details) => {
         $("#map-info-area").append(pinInformation);
       }
     })
-
 };
 
 $(document).ready(function() {
@@ -119,7 +139,6 @@ $(document).ready(function() {
       .catch(error => console.log(error));
   })
 
-
   $(document).on("submit", ".form-see-reviews", function(event) {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
@@ -130,8 +149,6 @@ $(document).ready(function() {
         showReviews(pinDetails)
       })
   })
-
-
 
   $(document).on("submit", ".form-delete-map", function(event) {
     event.preventDefault();
@@ -160,11 +177,39 @@ $(document).ready(function() {
               console.log('after post, the response received is', response);
             })
             .catch(error => console.log(error));
-
         }
       })
       .catch(error => {
         return alert(`${error.status}: ${error.responseText}`);
       })
     });
+
+  $(document).on("submit", ".form-edit-map", function(event) {
+    event.preventDefault();
+    const formDataAsArray = [];
+    $.each($(this).serializeArray(), function() {
+      formDataAsArray.push(this.value);
+    });
+    console.log('formDataAsArray', formDataAsArray)
+    const pinId = formDataAsArray[5]
+    const mapId = formDataAsArray[6];
+    const pinUpdateObj = {
+      title: formDataAsArray[0],
+      lat: formDataAsArray[1],
+      lng: formDataAsArray[2],
+      image_url: formDataAsArray[3],
+      description: formDataAsArray[4],
+      pinId,
+      mapId
+    };
+
+    $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
+      .then(response => {
+        showMyMaps();
+        alert(response);
+      })
+      .catch(error => alert(error));
+  });
+
+
 });
