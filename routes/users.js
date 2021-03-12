@@ -15,6 +15,7 @@ router.get("/", (req, res) => {
   });
 });
 const { getUserWithEmail, getUserWithID, addUser, getUserIDWithMapID } = require('../db//queries/users-queries');
+const { totalMapsCreated } = require('../db/queries/map-contributors-queries');
 const { isLoggedIn } = require('../public/scripts/middleware');
 
 
@@ -22,7 +23,12 @@ router.get("/about", (req, res) => {
   const userId = req.session.user_id;
   getUserWithID(userId)
     .then(data => {
-      res.send(data);
+      let userData = data;
+      totalMapsCreated(userData.id)
+        .then(totMaps => {
+          userData.count = totMaps.count
+          res.send(userData);
+        })
     })
 
 });
