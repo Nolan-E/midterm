@@ -77,9 +77,9 @@ const showMapDetails = (details) => {
           <p class="card-text mb-0">Average Rating 4.3/5 from 15 users</p>
           <p class="card-text mb-0">4 user reviews. Click to view</p>
         </small>
-        <form class="form-add-pin">
+        <form class="form-add-pin d-flex justify-content-end">
           <input type="hidden" name="map_id" value="${details.map_id}">
-          <button type="submit">Add a Pin</button>
+          <button type="submit" class="btn btn-outline-primary"><i class="bi bi-geo"></i></button>
         </form>
       </div>
     </div>
@@ -91,9 +91,9 @@ const showMapDetails = (details) => {
     .then(pins => {
       for (const pin of pins) {
         const pinInformation = `
-          <div class="card border-dark mb-1 pin-card" id=${pin.id}>
+          <div class="card mb-1 pin-card" id=${pin.id}>
             <div class="card-body text-dark">
-              <h5 class="card-title">${pin.title}</h5>
+              <h5 class="card-title text-primary">${pin.title}</h5>
             </div>
             <form class="form-edit-map">
             <div class="form-group mb-2 form-inline">
@@ -116,16 +116,17 @@ const showMapDetails = (details) => {
               <label for="pin.description">Description</label>
               <input class="form-control" type="text" name="pin.description" placeholder="pin.description" value=${pin.description}>
             </div>
+              <div class="d-flex flex-row-reverse justify-content-between m-2">
               <input type="hidden" name="pin_id" value="${pin.id}">
               <input type="hidden" name="map_id" value="${pin.map_id}">
-              <button type="submit">Update Pin</button>
+              <button type="submit"class="btn btn-outline-primary">Update Pin</button>
             </form>
-
             <form class="form-delete-pin">
               <input type="hidden" name="pinId" value="${pin.id}">
               <input type="hidden" name="mapId" value="${details.map_id}">
-              <button type="submit">Delete Pin</button>
+              <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
             </form>
+            </div>
           </div>
         `;
         $("#map-info-area").append(pinInformation);
@@ -276,7 +277,7 @@ $(document).ready(function() {
           </div>
         </div>
         `;
-        $("#map-info-area").append(createMapCard);
+        $("#map-info-area").prepend(createMapCard);
   })
 
   $(document).on("submit", "#form-submit-pins", function(event) {
