@@ -52,13 +52,11 @@ $(document).ready(function() {
 
     const mapName = $("#newMapName").val();
     console.log('creating new map:', mapName);
-    // Create dummy array with data from form
     const formDataAsArray = [];
     $.each($('form').serializeArray(), function() {
       formDataAsArray.push(this.value);
     });
 
-    // Converts above to an array of objects. Each object is a pin.
     const output = chunkArray(formDataAsArray, 4);
     console.log(output);
     $.ajax({
@@ -71,7 +69,10 @@ $(document).ready(function() {
         }
       },
       dataType: "json"
-    });
+    })
+    showMyMaps();
+    alert('Map created.');
+
 
 
 
