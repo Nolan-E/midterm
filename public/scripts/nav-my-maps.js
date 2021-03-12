@@ -45,8 +45,4 @@ const showMyMaps = () => {
 
 $(document).ready(function() {
   $("#nav-my-maps").on("click", showMyMaps);
-
-
-
-
 });
