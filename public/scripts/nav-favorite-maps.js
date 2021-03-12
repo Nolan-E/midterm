@@ -175,7 +175,7 @@ $(document).ready(function() {
 
     $.post("api/users/myuserid", {pinId, mapId})
       .then(response => {
-        console.log('the resultof posting to myuserid is', response);
+        // console.log('the resultof posting to myuserid is', response)
 
         if (response === 'authorized') {
           $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
@@ -196,8 +196,8 @@ $(document).ready(function() {
     $.each($(this).serializeArray(), function() {
       formDataAsArray.push(this.value);
     });
-    console.log('formDataAsArray', formDataAsArray);
-    const pinId = formDataAsArray[5];
+    // console.log('formDataAsArray', formDataAsArray)
+    const pinId = formDataAsArray[5]
     const mapId = formDataAsArray[6];
     const pinUpdateObj = {
       title: formDataAsArray[0],
@@ -209,12 +209,21 @@ $(document).ready(function() {
       mapId
     };
 
-    $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
+    $.post("api/users/myuserid", {pinId, mapId})
       .then(response => {
-        showMyMaps();
-        alert(response);
+
+        if (response === 'authorized') {
+          $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
+            .then(response => {
+              showMyMaps();
+              alert(response);
+            })
+            .catch(error => alert(error));
+              }
       })
-      .catch(error => alert(error));
+      .catch(error => {
+        return alert(`${error.status}: ${error.responseText}`);
+      })
   });
 
 
