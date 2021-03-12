@@ -25,7 +25,7 @@ $(document).ready(function() {
         const createMapCard = `
         <h1>Map Creation</h1>
 
-        <div class="card border-dark mt-0 mb-1 create-card">
+        <div class="card border-light mt-0 mb-1 create-card">
           <div class="card-header bg-transparent border-dark">Create a new map</div>
           <div class="card-body text-dark">
             <textarea name="text" id="newMapName" placeholder=" Title your map" required></textarea>
@@ -33,7 +33,7 @@ $(document).ready(function() {
             <form id="form-create-map" action="">
               <div id="form-container">
               </div>
-              <input id="button-create-map" type="submit" value="Create!">
+              <input id="button-create-map" type="submit" value="Create!" class="btn btn-outline-secondary">
             </form>
 
           </div>
@@ -69,7 +69,7 @@ $(document).ready(function() {
         }
       },
       dataType: "json"
-    })
+    });
     setTimeout(function() {showMyMaps()}, 2000);
     alert('Map created.');
   });

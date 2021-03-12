@@ -12,26 +12,31 @@ const showFavoriteMaps = function() {
           ratingStr = `No rating`;
         }
         const createMapCard = `
-        <div class="card border-primary map-card" id=${map.map_id}>
-        <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
-          <div class="card-header">Map by: ${map.created_by}</div>
+        <div class="card map-card p-2" id=${map.map_id}>
+        <div class="imgContainer card-img-top d-flex align-items-center-center">
+        <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top mx-auto d-block">
+        </div>
+          <div class="card-header text-small p-1">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
-            <form class="form-map-name">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">${map.map_name} (Click to see more details)</button>
-            </form>
-            <form class="form-see-reviews">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">See Reviews</button>
-            </form>
-            <form class="form-delete-favorite">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">Remove Map From Favorites</button>
-            </form>
-            <small id="map-author-rating">
-              <p class="card-text">Rating: ${map.rating}/5</p>
-              <p class="card-text">${map.map_created}</p>
-            </small>
+          <h5 class="card-title">${map.map_name}</h5>
+          <small id="map-author-rating">
+          <p class="card-text">Rating: ${map.rating}/5</p>
+          <p class="card-text">${map.map_created}</p>
+          </small>
+          <div class="d-flex flex-row justify-content-between">
+          <form class="form-map-name">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-info"></i></button>
+          </form>
+          <form class="form-see-reviews">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit"class="btn btn-outline-secondary">See Reviews</button>
+          </form>
+          <form class="form-delete-favorite">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Favorite</button>
+          </form>
+          </div>
           </div>
         </div>
         `;
@@ -185,28 +190,28 @@ $(document).ready(function() {
         // console.log('the resultof posting to myuserid is', response)
 
         if (response === 'authorized') {
-          console.log('You own this map!')
+          console.log('You own this map!');
           $.get(`http://localhost:8080/api/maps/${mapId}`)
             .then(response => {
               console.log('@@@@@@@', response);
               if (response.length !== 1) {
 
                 $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
-                    .then(() => {
-                      // Refresh left bar to show map details
-                      $.get(`http://localhost:8080/api/maps/${mapId}`)
-                        .then(mapDetails => {
-                          // console.log('This map has the following details:', mapDetails);
-                          showMapDetails(mapDetails[0]);
-                        })
-                      // console.log('after post, the response received is', response);
-                    })
-                    .catch(error => console.log(error));
+                  .then(() => {
+                    // Refresh left bar to show map details
+                    $.get(`http://localhost:8080/api/maps/${mapId}`)
+                      .then(mapDetails => {
+                        // console.log('This map has the following details:', mapDetails);
+                        showMapDetails(mapDetails[0]);
+                      });
+                    // console.log('after post, the response received is', response);
+                  })
+                  .catch(error => console.log(error));
 
               } else {
                 alert('This is the last pin on this map. Please delete the map instead to delete this pin.');
               }
-            })
+            });
         }
       })
       .catch(error => {

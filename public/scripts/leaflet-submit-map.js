@@ -24,22 +24,23 @@ const onMapClickAddMarker = function(e) {
 
   );
   const appendField = `
-      <div class="card border-dark mt-3 mb-1 create-card" id="pin${lat}">
+      <div class="card border-dark mt-3 mb-1 p-2 create-card" id="pin${lat}">
         <div>
-          <label for="pin-title">Name:</label>
-          <input type="text" name="pins[${i}][pin-title]" required>
+          <input type="text" name="pins[${i}][pin-title]" placeholder="Pin Name"required>
         </div>
         <div>
-          <label for="pin-latitude">Latitude:</label>
-          <input type="text" name="pins[${i}][pin-latitude]" value=${lat} hidden>
+        <input type="text" name="pins[${i}][pin-description]" placeholder="Description" required>
         </div>
         <div>
-          <label for="pin-longitude">Longitude:</label>
-          <input type="text" name="pins[${i}][pin-longitude]" value=${lng} hidden>
+
+          <div class="input-group-prepend">
+          <div class="input-group-text">lat:</div>
+          <input class="form-control font-weight-light text-sm" type="text" name="pins[${i}][pin-latitude]" value=${lat} readonly>
         </div>
-        <div>
-          <label for="pin-description">Description:</label>
-          <input type="text" name="pins[${i}][pin-description]" required>
+        <div class="form-group">
+          <div class="input-group-prepend">
+          <div class="input-group-text input-sm">lon:</div>
+          <input class="form-control font-weight-light text-sm input-sm" type="text" name="pins[${i}][pin-longitude]" value=${lng} readonly>
         </div>
       </div>
     `;
