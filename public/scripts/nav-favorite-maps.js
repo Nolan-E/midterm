@@ -61,6 +61,7 @@ const showReviews = (reviews) => {
 };
 
 const showMapDetails = (details) => {
+  // console.log('details are', details)
   $("#map-info-area").empty();
   const mapInformation = `
     <div class="card border-primary mb-1">
@@ -91,6 +92,14 @@ const showMapDetails = (details) => {
               <p>pin.map_id ${pin.map_id}</p>
               <p>pin.description ${pin.description}</p>
             </div>
+            <form class="form-edit-map">
+
+
+
+              <input type="hidden" name="map_id" value="${pin.map_id}">
+              <button type="submit">Update Pin</button>
+            </form>
+
             <form class="form-delete-pin">
               <input type="hidden" name="pinId" value="${pin.id}">
               <input type="hidden" name="mapId" value="${details.map_id}">
@@ -119,7 +128,6 @@ $(document).ready(function() {
       .catch(error => console.log(error));
   })
 
-
   $(document).on("submit", ".form-see-reviews", function(event) {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
@@ -130,8 +138,6 @@ $(document).ready(function() {
         showReviews(pinDetails)
       })
   })
-
-
 
   $(document).on("submit", ".form-delete-map", function(event) {
     event.preventDefault();
@@ -160,11 +166,16 @@ $(document).ready(function() {
               console.log('after post, the response received is', response);
             })
             .catch(error => console.log(error));
-
         }
       })
       .catch(error => {
         return alert(`${error.status}: ${error.responseText}`);
       })
     });
+
+  $(document).on("submit", ".form-edit-map", function(event) {
+    alert('This still needs to be implemented. Do this after Eric figures out how to manipulate on create map.');
+  });
+
+
 });
