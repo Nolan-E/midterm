@@ -12,26 +12,31 @@ const showFavoriteMaps = function() {
           ratingStr = `No rating`;
         }
         const createMapCard = `
-        <div class="card border-primary map-card" id=${map.map_id}>
-        <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
-          <div class="card-header">Map by: ${map.created_by}</div>
+        <div class="card map-card mb-2 p-1" id=${map.map_id}>
+        <div class="imgContainer card-img-top">
+        <img id="cardimg" src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "mx-auto">
+        </div>
+          <div class="card-header p-1">Map by: ${map.created_by}</div>
           <div class="card-body text-primary">
-            <form class="form-map-name">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">${map.map_name} (Click to see more details)</button>
-            </form>
-            <form class="form-see-reviews">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">See Reviews</button>
-            </form>
-            <form class="form-delete-favorite">
-              <input type="hidden" name="map_id" value="${map.map_id}">
-              <button type="submit">Remove Map From Favorites</button>
-            </form>
-            <small id="map-author-rating">
-              <p class="card-text">Rating: ${map.rating}/5</p>
-              <p class="card-text">${map.map_created}</p>
-            </small>
+          <h5 class="card-title">${map.map_name}</h5>
+          <form class="form-see-reviews">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit"class="btn btn-sm btn-outline-secondary">See Reviews</button>
+          </form>
+          <small id="map-author-rating">
+          <p class="card-text">Rating: ${map.rating}/5</p>
+          <p class="card-text">${map.map_created}</p>
+          </small>
+          <div class="d-flex justify-content-between">
+          <form class="form-map-name">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-info"></i></button>
+          </form>
+          <form class="form-delete-favorite">
+            <input type="hidden" name="map_id" value="${map.map_id}">
+            <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i>Favorite</button>
+          </form>
+          </div>
           </div>
         </div>
         `;
@@ -77,9 +82,9 @@ const showMapDetails = (details) => {
           <p class="card-text mb-0">Average Rating 4.3/5 from 15 users</p>
           <p class="card-text mb-0">4 user reviews. Click to view</p>
         </small>
-        <form class="form-add-pin">
+        <form class="form-add-pin d-flex justify-content-end">
           <input type="hidden" name="map_id" value="${details.map_id}">
-          <button type="submit">Add a Pin</button>
+          <button type="submit" class="btn btn-outline-primary"><i class="bi bi-geo"></i></button>
         </form>
       </div>
     </div>
@@ -91,9 +96,9 @@ const showMapDetails = (details) => {
     .then(pins => {
       for (const pin of pins) {
         const pinInformation = `
-          <div class="card border-dark mb-1 pin-card" id=${pin.id}>
+          <div class="card mb-1 pin-card" id=${pin.id}>
             <div class="card-body text-dark">
-              <h5 class="card-title">${pin.title}</h5>
+              <h5 class="card-title text-primary">${pin.title}</h5>
             </div>
             <form class="form-edit-map">
             <div class="form-group mb-2 form-inline">
@@ -116,16 +121,17 @@ const showMapDetails = (details) => {
               <label for="pin.description">Description</label>
               <input class="form-control" type="text" name="pin.description" placeholder="pin.description" value=${pin.description}>
             </div>
+              <div class="d-flex flex-row-reverse justify-content-between m-2">
               <input type="hidden" name="pin_id" value="${pin.id}">
               <input type="hidden" name="map_id" value="${pin.map_id}">
-              <button type="submit">Update Pin</button>
+              <button type="submit"class="btn btn-outline-primary">Update Pin</button>
             </form>
-
             <form class="form-delete-pin">
               <input type="hidden" name="pinId" value="${pin.id}">
               <input type="hidden" name="mapId" value="${details.map_id}">
-              <button type="submit">Delete Pin</button>
+              <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
             </form>
+            </div>
           </div>
         `;
         $("#map-info-area").append(pinInformation);
@@ -158,8 +164,8 @@ $(document).ready(function() {
       .then(pinDetails => {
         // console.log('pinDetails are', pinDetails);
         showReviews(pinDetails);
-      })
-  })
+      });
+  });
 
   $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
@@ -184,28 +190,28 @@ $(document).ready(function() {
         // console.log('the resultof posting to myuserid is', response)
 
         if (response === 'authorized') {
-          console.log('You own this map!')
+          console.log('You own this map!');
           $.get(`http://localhost:8080/api/maps/${mapId}`)
             .then(response => {
               console.log('@@@@@@@', response);
               if (response.length !== 1) {
 
                 $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
-                    .then(() => {
-                      // Refresh left bar to show map details
-                      $.get(`http://localhost:8080/api/maps/${mapId}`)
-                        .then(mapDetails => {
-                          // console.log('This map has the following details:', mapDetails);
-                          showMapDetails(mapDetails[0]);
-                        })
-                      // console.log('after post, the response received is', response);
-                    })
-                    .catch(error => console.log(error));
+                  .then(() => {
+                    // Refresh left bar to show map details
+                    $.get(`http://localhost:8080/api/maps/${mapId}`)
+                      .then(mapDetails => {
+                        // console.log('This map has the following details:', mapDetails);
+                        showMapDetails(mapDetails[0]);
+                      });
+                    // console.log('after post, the response received is', response);
+                  })
+                  .catch(error => console.log(error));
 
               } else {
                 alert('This is the last pin on this map. Please delete the map instead to delete this pin.');
               }
-            })
+            });
         }
       })
       .catch(error => {
@@ -276,7 +282,7 @@ $(document).ready(function() {
           </div>
         </div>
         `;
-        $("#map-info-area").append(createMapCard);
+        $("#map-info-area").prepend(createMapCard);
   })
 
   $(document).on("submit", "#form-submit-pins", function(event) {
