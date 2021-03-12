@@ -50,10 +50,22 @@ const editPin = (userID, pinID, pinObj) => {
     .catch(err => err)
 };
 
+const getPinsByMapID = (mapID) => {
+  return db.query(`
+    SELECT *
+    FROM pins
+    WHERE map_id = $1 AND active = true
+    ORDER BY lat;`, [mapID]
+  )
+    .then(response => response.rows)
+    .catch(err => err)
+};
+
 //EXPORT FUNCTIONS
 module.exports = {
   createPin,
   manyPins,
   deletePin,
-  editPin
+  editPin,
+  getPinsByMapID
 };

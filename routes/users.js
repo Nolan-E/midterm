@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     ueser: 'wouldn\'t you like to know'
   });
 });
-const { getUserWithEmail, getUserWithID, addUser } = require('../db//queries/users-queries');
+const { getUserWithEmail, getUserWithID, addUser, getUserIDWithMapID } = require('../db//queries/users-queries');
 const { isLoggedIn } = require('../public/scripts/middleware');
 
 
@@ -63,6 +63,21 @@ router.post("/register", (req, res) => {
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session = null;
   res.send("Successfully logged out.")
+})
+
+router.post("/myuserid", (req, res) => {
+  const userId = req.session.user_id;
+  console.log('The logged in user has an id of', userId)
+  const { mapId } = req.body;
+  console.log(req.body)
+  getUserIDWithMapID(mapId)
+    .then(mapOwnerId => {
+      console.log('The maps owner has an id of', mapOwnerId.user_id)
+      if (userId !== mapOwnerId.user_id) {
+        return res.status(403).send('You are not authorized to perform this action.');
+      }
+      res.send('authorized');
+    })
 })
 
 module.exports = router;
