@@ -24,14 +24,20 @@ $(document).ready(function() {
         markerGroup.clearLayers();
         let marker;
         for (const pin of maps) {
-          console.log(pin);
+          let ratingStr = '';
+          if (pin.rating) {
+            ratingStr = `Rating: ${pin.rating}`;
+          } else {
+            ratingStr = `No rating`;
+          }
+          console.log('######LOGGING######',pin);
           marker = new L.Marker([pin.pin_lat, pin.pin_lng]).bindPopup(
             `<div class="card border-primary mb-2 pin-pop">
             <img src=${pin.img_url} class="card-img-top">
             <div class="card-body text-primary">
             <h5 class="card-title">${pin.pin_title}</h5>
             <small id="map-author-rating">
-              <p class="card-text">Rating: ${pin.review}/5</p>
+              <p class="card-text">${ratingStr}</p>
               <p class="card-text">${pin.pin_description}</p>
             </small>
             </div>
