@@ -51,7 +51,7 @@ L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=KSgZl5R17
 $(document).ready(function() {
 
   // will alert user and then contain button to approve use of location or not.
-  // alert(`wiki maps would like to use your location \n need to add confirm or deny button`);
+  // alert(`some maps would like to use your location \n need to add confirm or deny button`);
   // $.ajax('https://api.ipify.org?format=json', {method: 'GET'})
   //   .then(res =>
   //     $.ajax(`https://freegeoip.app/json/${res.ip}`))
