@@ -51,19 +51,18 @@ $(document).ready(function() {
     let id = Number(this.id);
     $.get(`/api/pins/${id}`)
       .then(pins => {
-      // markerGroup.clearLayers();
-        console.log('the pins returned are: ', pins);
-        for (const pin of pins) {
+        // markerGroup.clearLayers();
+        // console.log('the pins returned are: ', pins)
+        for(const pin of pins){
           if (pin.pin_id === id) {
-            console.log('check passed')
-            // console.log('this pins details are', pin)
-
+            // console.log('check passed');
+            // console.log('this pins details are', pin);
             markerGroup.addLayer(marker = L.marker([pin.pin_lat, pin.pin_lng]).addTo(mymap)
-              .bindPopup(editPopup));
+            .bindPopup(editPopup));
             markerGroup.addTo(mymap);
             mymap.fitBounds(markerGroup.getBounds());
           }
-        }
+        };
       });
-  });
+  })
 });

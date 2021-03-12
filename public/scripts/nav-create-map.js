@@ -29,7 +29,7 @@ $(document).ready(function() {
           <div class="card-header bg-transparent border-dark">Create a new map</div>
           <div class="card-body text-dark">
             <textarea name="text" id="newMapName" placeholder=" Title your map" required></textarea>
-            <p class="mb-3">Select an spot on the map to drop your markers.</p>
+            <p class="mb-3">Select a spot on the map to drop a new pin.</p>
             <form id="form-create-map" action="">
               <div id="form-container">
               </div>
@@ -38,7 +38,7 @@ $(document).ready(function() {
 
           </div>
         </div>
-      `;
+        `;
         $("#map-info-area").append(createMapCard);
       })
       .catch(error => {
@@ -70,11 +70,7 @@ $(document).ready(function() {
       },
       dataType: "json"
     })
-    showMyMaps();
+    setTimeout(function() {showMyMaps()}, 2000);
     alert('Map created.');
-
-
-
-
   });
 });

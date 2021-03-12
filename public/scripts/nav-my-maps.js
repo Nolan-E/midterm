@@ -53,9 +53,8 @@ $(document).ready(function() {
     $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
       .then((data) => {
         console.log('Delete Map > Then > Received data is:', data)
-        showFavoriteMaps();
+        showMyMaps();
       })
       .catch(error => console.log(error));
   })
-
 });
