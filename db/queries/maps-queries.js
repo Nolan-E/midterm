@@ -16,11 +16,12 @@ const getAllMapsAnon = () => {
     .then(response => response.rows)
     .catch(err => err);
 };
+// get the average rating of a map by id
 const getAvgRatingForMap = (mapID) => {
   return db.query(`
-  SELECT avg(rating) FROM fav_maps
-  JOIN maps ON map_id = maps.id
-  WHERE map_id = $1 AND maps.active = true;
+    SELECT avg(rating) FROM fav_maps
+    JOIN maps ON map_id = maps.id
+    WHERE map_id = $1 AND maps.active = true;
   `, [mapID])
     .then(response => response.rows[0])
 };
@@ -31,8 +32,8 @@ const getTopRated = () => {
     users.name AS created_by, TRUNC(AVG(fav_maps.rating), 1) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
-    JOIN fav_maps ON fav_maps.map_id = maps.id
-    JOIN pins ON pins.map_id = maps.id
+    LEFT JOIN fav_maps ON fav_maps.map_id = maps.id
+    LEFT JOIN pins ON pins.map_id = maps.id
     WHERE maps.active = true AND pins.active = true
     GROUP BY maps.id, users.name
     ORDER BY rating DESC
@@ -41,7 +42,7 @@ const getTopRated = () => {
     .then(response => response.rows)
     .catch(err => err);
 };
-// Might change pins table join from outer to inner
+
 // Gets a list of all maps by creator
 const getAllMapsByUser = (userID) => {
   return db.query(`
@@ -58,15 +59,15 @@ const getAllMapsByUser = (userID) => {
     .then(response => response.rows)
     .catch(err => err);
 };
-  // Gets a map by map_id
-  const getMapsByID = (mapID) => {
-    return db.query(`
+// Gets a map by map_id
+const getMapsByID = (mapID) => {
+  return db.query(`
     SELECT maps.id AS map_id, maps.name AS map_name, TO_CHAR(maps.date_created::date, 'Mon dd, yyyy') AS map_created,
     users.name AS created_by, TRUNC(AVG(fav_maps.rating), 1) AS rating, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
-    JOIN fav_maps ON fav_maps.map_id = maps.id
-    JOIN pins ON pins.map_id = maps.id
+    LEFT JOIN fav_maps ON fav_maps.map_id = maps.id
+    LEFT JOIN pins ON pins.map_id = maps.id
     WHERE maps.id = $1 AND maps.active = true AND pins.active = true
     GROUP BY maps.id, users.name;`, [mapID]
   )
@@ -81,8 +82,8 @@ const getMapOfPinsByID = (mapID) => {
     pins.lng AS pin_lng, pins.title AS pin_title, pins.description AS pin_description, MIN(pins.image_url) AS img_url
     FROM maps
     JOIN users ON maps.user_id = users.id
-    JOIN fav_maps ON fav_maps.map_id = maps.id
-    JOIN pins ON maps.id = pins.map_id
+    LEFT JOIN fav_maps ON fav_maps.map_id = maps.id
+    LEFT JOIN pins ON maps.id = pins.map_id
     WHERE maps.id = $1 AND maps.active = true AND pins.active = true
     GROUP BY maps.id, users.name, pins.id
     ORDER BY pin_id;`, [mapID]

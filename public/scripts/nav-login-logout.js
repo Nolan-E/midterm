@@ -46,6 +46,9 @@ $(document).ready(function() {
 
   $(document).on("click", "#nav-logout", function(event) {
     event.preventDefault();
+    markerGroup.clearLayers();
+    showExploreMaps();
+    mymap.fitWorld();
     $.get("api/users/logout")
       .then((data) => {
         alert(data);

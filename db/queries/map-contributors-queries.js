@@ -15,9 +15,9 @@ const getRecentEdits = (mapID) => {
   return db.query(`
     SELECT map_id, maps.name AS map_name, map_contributors.user_id, users.name AS user_name, edit_date
     FROM map_contributors
-    JOIN maps ON maps.id = map_id
-    JOIN users ON users.id = maps.user_id
-    WHERE users.id = $1
+    LEFT JOIN maps ON maps.id = map_id
+    LEFT JOIN users ON users.id = maps.user_id
+    WHERE map_id = $1
     ORDER BY edit_date DESC
     LIMIT 10;`, [mapID]
   )
