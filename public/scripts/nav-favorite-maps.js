@@ -5,6 +5,12 @@ const showFavoriteMaps = () => {
       console.log('Retrieved data is', maps)
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
       for (const map of maps) {
+        let ratingStr = '';
+        if (map.rating) {
+          ratingStr = `Rating: ${map.rating}`;
+        } else {
+          ratingStr = `No rating`
+        }
         const createMapCard = `
         <div class="card border-primary map-card" id=${map.map_id}>
         <img src="https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1234&q=80" class= "card-img-top">
@@ -24,7 +30,7 @@ const showFavoriteMaps = () => {
             </form>
 
             <small id="map-author-rating">
-              <p class="card-text">Rating: ${map.rating}/5</p>
+              <p class="card-text">${ratingStr}</p>
               <p class="card-text">${map.map_created}</p>
             </small>
           </div>

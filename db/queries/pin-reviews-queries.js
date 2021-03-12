@@ -6,8 +6,8 @@ const getAllPinReviews = (userID) => {
     SELECT pin_id, user_id, stars, message AS pin_review_msg, users.name AS user_name,
     TO_CHAR(date_created::date, 'Mon dd, yyyy') AS date_reviewed, pins.title AS pin_title, pins.lat, pins.lng
     FROM pin_reviews
-    JOIN users ON users.id = user_id
-    JOIN pins ON pins.id = pin_id
+    LEFT JOIN users ON users.id = user_id
+    LEFT JOIN pins ON pins.id = pin_id
     WHERE users.id = $1 AND pin_reviews.active = true AND pins.active = true
     ORDER BY date_reviewed DESC;`, [userID]
   )
@@ -20,8 +20,8 @@ const getAllReviewsByPin = (pinID) => {
     SELECT pin_id, user_id, stars, message AS pin_review_msg, users.name AS user_name,
     TO_CHAR(date_created::date, 'Mon dd, yyyy') AS date_reviewed, pins.title AS pin_title, pins.lat, pins.lng
     FROM pin_reviews
-    JOIN users ON users.id = user_id
-    JOIN pins ON pins.id = pin_id
+    LEFT JOIN users ON users.id = user_id
+    LEFT JOIN pins ON pins.id = pin_id
     WHERE pin_id = $1 AND pin_reviews.active = true AND pins.active = true
     ORDER BY date_reviewed DESC;`, [pinID]
   )
