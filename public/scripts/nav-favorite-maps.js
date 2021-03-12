@@ -204,7 +204,10 @@ $(document).ready(function() {
     };
 
     $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
-      .then(response => alert(response))
+      .then(response => {
+        showMyMaps();
+        alert(response);
+      })
       .catch(error => alert(error));
   });
 
