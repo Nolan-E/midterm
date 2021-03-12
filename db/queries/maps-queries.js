@@ -42,7 +42,6 @@ const getTopRated = () => {
     .then(response => response.rows)
     .catch(err => err);
 };
-// Might change pins table join from outer to inner
 // Gets a list of all maps by creator
 const getAllMapsByUser = (userID) => {
   return db.query(`
