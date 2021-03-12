@@ -121,7 +121,7 @@ router.get('/:id/pins', (req, res) => {
   })
 })
 
-router.get("/:id", isLoggedIn, (req,res) => {
+router.get("/:id", (req,res) => {
   const id = req.params.id;
   console.log('map id is', id)
   getMapOfPinsByID(id)
