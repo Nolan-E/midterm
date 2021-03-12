@@ -129,4 +129,18 @@ router.post('/:id/deletefromfavorites', (req, res) => {
     })
 });
 
+// add pins to a map
+router.post("/:id/add", (req, res) => {
+  // console.log("Trying to add pin(s) now...");
+  const { mapId } = req.body;
+  // console.log('body', req.body);
+  // const userId = req.session.user_id;
+  // console.log('my user id is', userId);
+  // console.log('params', req.params);
+  const newPins = req.body.output;
+  // console.log('newpins are', newPins)
+  manyPins(mapId, newPins)
+  res.send('Pin(s) successfully created.');
+})
+
 module.exports = router;
