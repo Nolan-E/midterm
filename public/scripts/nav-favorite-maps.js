@@ -24,7 +24,7 @@ const showFavoriteMaps = () => {
               <input type="hidden" name="map_id" value="${map.map_id}">
               <button type="submit">See Reviews</button>
             </form>
-            <form class="form-delete-map">
+            <form class="form-delete-favorite">
               <input type="hidden" name="map_id" value="${map.map_id}">
               <button type="submit">Remove Map From Favorites</button>
             </form>
@@ -156,10 +156,10 @@ $(document).ready(function() {
       })
   })
 
-  $(document).on("submit", ".form-delete-map", function(event) {
+  $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
+    $.post(`http://localhost:8080/api/maps/${mapId}/deletefromfavorites`, {mapId})
       .then((data) => {
         console.log('Delete Map > Then > Received data is:', data)
         showFavoriteMaps();
