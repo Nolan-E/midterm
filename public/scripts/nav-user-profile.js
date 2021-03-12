@@ -30,7 +30,7 @@ const modalUserInfo =  function(userInfo) {
       <div>${userInfo.name} <span class="text-muted">#${userInfo.id}<span></div>
       <div></div>
       <div>Email: ${userInfo.email}</div>
-      <div> Community Maps Contributed:</div>
+      <div> Community Maps Contributed: ${userInfo.count}</div>
       </div>
         </div>
         <div class="Profile d-flex justify-content-between">
@@ -54,12 +54,12 @@ $(document).ready(function() {
     //$("#map-info-area").empty()
     $.when($.get("api/users/about")
       .then((data) => {
+        console.log(data)
         // displayUserInfo(data)
         modalUserInfo(data);
       }))
       .done(function() {
         $("#profile-modal").modal('show');
-        console.log('this is done');
       }
       );
   });
