@@ -1,5 +1,5 @@
 const showMyMaps = () => {
-  console.log('###CLICKED###')
+  // console.log('###CLICKED###')
   $("#map-info-area").empty()
   $.get("api/maps/mymaps")
     .then(maps => {
