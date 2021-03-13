@@ -43,11 +43,15 @@ This project was completed by [Eric M](https://github.com/ermurray), [Gio W](htt
 
 ## Final Product
 
-!['Welcome'](imagelink.url.com.org.net.co)
-!['Explore'](imagelink.url.com.org.net.co)
-!['Create'](imagelink.url.com.org.net.co)
-!['Favourite'](imagelink.url.com.org.net.co)
-!['Profile'](imagelink.url.com.org.net.co)
+!['Welcome'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Welcome%20screen.png?raw=true)
+<br>
+!['Explore'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Explore%20map.png?raw=true)
+<br>
+!['Create'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Create%20map.png?raw=true)
+<br>
+!['Favourite'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Favorite%20maps.png?raw=true)
+<br>
+!['Profile'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Profile%20card.png?raw=true)
 ****
 
 ## Future Development
