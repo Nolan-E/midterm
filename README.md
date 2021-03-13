@@ -43,15 +43,19 @@ This project was completed by [Eric M](https://github.com/ermurray), [Gio W](htt
 
 ## Final Product
 
-!['Welcome'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Welcome%20screen.png?raw=true)
+!['Welcome'](https://github.com/Nolan-E/midterm/blob/master/docs/Welcome%20screen.png?raw=true)
 <br>
-!['Explore'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Explore%20map.png?raw=true)
+
+!['Explore'](https://github.com/Nolan-E/midterm/blob/master/docs/Explore%20map.png?raw=true)
 <br>
-!['Create'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Create%20map.png?raw=true)
+
+!['Create'](https://github.com/Nolan-E/midterm/blob/master/docs/Create%20map.png?raw=true)
 <br>
-!['Favourite'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Favorite%20maps.png?raw=true)
+
+!['Favourite'](https://github.com/Nolan-E/midterm/blob/master/docs/Favorite%20maps.png?raw=true)
 <br>
-!['Profile'](https://github.com/Nolan-E/midterm/blob/nolan-fixes/docs/Profile%20card.png?raw=true)
+
+!['Profile'](https://github.com/Nolan-E/midterm/blob/master/docs/Profile%20card.png?raw=true)
 ****
 
 ## Future Development
