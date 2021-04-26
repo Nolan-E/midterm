@@ -52,7 +52,7 @@ $(document).ready(function() {
 
   $("#nav-user-profile").on("click", function() {
     //$("#map-info-area").empty()
-    $.when($.get("api/users/about")
+    $.when($.get("/api/users/about")
       .then((data) => {
         console.log(data)
         // displayUserInfo(data)

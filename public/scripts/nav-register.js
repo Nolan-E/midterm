@@ -37,7 +37,7 @@ $(document).ready(function() {
     });
     const userRegisterObj = {name: formDataAsArray[0], email: formDataAsArray[1], password: formDataAsArray[2]};
 
-    $.post("api/users/register", userRegisterObj)
+    $.post("/api/users/register", userRegisterObj)
       .then((usersName) => {
         console.log('usersName is', usersName)
         showExploreMaps();

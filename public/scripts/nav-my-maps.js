@@ -1,6 +1,6 @@
 const showMyMaps = () => {
   $("#map-info-area").empty();
-  $.get("api/maps/mymaps")
+  $.get("/api/maps/mymaps")
     .then(maps => {
       $("#map-info-area").append("<h1>My Maps</h1>");
       for (const map of maps) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
     console.log('mapId', mapId);
-    $.post(`http://localhost:8080/api/maps/${mapId}/delete`, {mapId})
+    $.post(`/api/maps/${mapId}/delete`, {mapId})
       .then((data) => {
         console.log('Delete Map > Then > Received data is:', data);
         showMyMaps();

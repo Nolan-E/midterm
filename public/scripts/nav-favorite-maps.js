@@ -1,6 +1,6 @@
 const showFavoriteMaps = function() {
   $("#map-info-area").empty();
-  $.get("api/maps/favorites")
+  $.get("/api/maps/favorites")
     .then(maps => {
       console.log('Retrieved data is', maps);
       $("#map-info-area").append("<h1>Favorite Maps</h1>");
@@ -92,7 +92,7 @@ const showMapDetails = (details) => {
   $("#map-info-area").append(mapInformation);
 
 
-  $.get(`http://localhost:8080/api/maps/${details.map_id}/pins`)
+  $.get(`/api/maps/${details.map_id}/pins`)
     .then(pins => {
       for (const pin of pins) {
         const pinInformation = `
@@ -148,7 +148,7 @@ $(document).ready(function() {
     // console.log('the mapid is', mapId);
 
     // Refresh left bar to show map details
-    $.get(`http://localhost:8080/api/maps/${mapId}`)
+    $.get(`/api/maps/${mapId}`)
       .then(mapDetails => {
         // console.log('This map has the following details:', mapDetails);
         showMapDetails(mapDetails[0]);
@@ -160,7 +160,7 @@ $(document).ready(function() {
     event.preventDefault();
     const pinId = Number($(this).serializeArray()[0].value);
     // console.log(pinId);
-    $.get(`api/pins/${pinId}`)
+    $.get(`/api/pins/${pinId}`)
       .then(pinDetails => {
         // console.log('pinDetails are', pinDetails);
         showReviews(pinDetails);
@@ -170,7 +170,7 @@ $(document).ready(function() {
   $(document).on("submit", ".form-delete-favorite", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post(`http://localhost:8080/api/maps/${mapId}/deletefromfavorites`, {mapId})
+    $.post(`/api/maps/${mapId}/deletefromfavorites`, {mapId})
       .then((data) => {
         // console.log('Delete Map > Then > Received data is:', data);
         showFavoriteMaps();
@@ -185,21 +185,21 @@ $(document).ready(function() {
     const mapId = Number($(this).serializeArray()[1].value);
 
     // check if the current user is the actual author. only author should be able to edit/delete
-    $.post("api/users/myuserid", {pinId, mapId})
+    $.post("/api/users/myuserid", {pinId, mapId})
       .then(response => {
         // console.log('the resultof posting to myuserid is', response)
 
         if (response === 'authorized') {
           console.log('You own this map!');
-          $.get(`http://localhost:8080/api/maps/${mapId}`)
+          $.get(`/api/maps/${mapId}`)
             .then(response => {
               console.log('@@@@@@@', response);
               if (response.length !== 1) {
 
-                $.post(`http://localhost:8080/api/pins/${pinId}/delete`, {pinId})
+                $.post(`/api/pins/${pinId}/delete`, {pinId})
                   .then(() => {
                     // Refresh left bar to show map details
-                    $.get(`http://localhost:8080/api/maps/${mapId}`)
+                    $.get(`/api/maps/${mapId}`)
                       .then(mapDetails => {
                         // console.log('This map has the following details:', mapDetails);
                         showMapDetails(mapDetails[0]);
@@ -238,14 +238,14 @@ $(document).ready(function() {
       mapId
     };
 
-    $.post("api/users/myuserid", {pinId, mapId})
+    $.post("/api/users/myuserid", {pinId, mapId})
       .then(response => {
 
         if (response === 'authorized') {
-          $.post(`api/pins/${pinId}/edit`, pinUpdateObj)
+          $.post(`/api/pins/${pinId}/edit`, pinUpdateObj)
             .then(response => {
               // Refresh left bar to show map details
-              $.get(`http://localhost:8080/api/maps/${mapId}`)
+              $.get(`/api/maps/${mapId}`)
                 .then(mapDetails => {
                   // console.log('This map has the following details:', mapDetails);
                   showMapDetails(mapDetails[0]);
@@ -299,11 +299,11 @@ $(document).ready(function() {
     const output = chunkArray(formDataAsArray, 4);
     // console.log('after chunkarray, my output looks like this: ', output);
 
-    $.post(`api/maps/${mapId}/add`, {mapId, output})
+    $.post(`/api/maps/${mapId}/add`, {mapId, output})
       .then(response => {
 
         // Refresh left bar to show map details
-        $.get(`http://localhost:8080/api/maps/${mapId}`)
+        $.get(`/api/maps/${mapId}`)
         .then(mapDetails => {
           // console.log('This map has the following details:', mapDetails);
           showMapDetails(mapDetails[0]);

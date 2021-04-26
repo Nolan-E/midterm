@@ -1,6 +1,6 @@
 const showExploreMaps = () => {
   $("#map-info-area").empty();
-  $.get("api/maps")
+  $.get("/api/maps")
     .then(maps => {
       $("#map-info-area").append("<h1>Explore Maps</h1>");
       for (const map of maps) {
@@ -50,7 +50,7 @@ $(document).ready(function() {
   $(document).on("submit", ".add-to-favorites", function(event) {
     event.preventDefault();
     const mapId = Number($(this).serializeArray()[0].value);
-    $.post("api/maps/addtofavorites", {mapId})
+    $.post("/api/maps/addtofavorites", {mapId})
       .then((data) => {
         console.log("Added to favorites!");
         console.log('The following entry has been added into the fav_maps table: ', data);

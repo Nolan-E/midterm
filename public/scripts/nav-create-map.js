@@ -20,7 +20,7 @@ $(document).ready(function() {
     markerGroup.clearLayers();
     $("#map-info-area").empty();
 
-    $.get('api/maps/create')
+    $.get('/api/maps/create')
       .then(() => {
         const createMapCard = `
         <h1>Map Creation</h1>
